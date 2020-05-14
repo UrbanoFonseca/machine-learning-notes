@@ -4,7 +4,7 @@ description: 'https://www.youtube.com/watch?v=zvrcyqcN9Wo'
 
 # Lectures on Causality
 
-## Part 1
+## Part 0 - Motivation
 
 ### Statistics vs Causality
 
