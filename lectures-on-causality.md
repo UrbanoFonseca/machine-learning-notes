@@ -4,7 +4,9 @@ description: 'https://www.youtube.com/watch?v=zvrcyqcN9Wo'
 
 # Lectures on Causality
 
-## Statistics vs Causality
+## Part 1
+
+### Statistics vs Causality
 
 In **statistics** we are often predicting the expected value of a dependent variable based on some observed valu1es of our inputs. In **causality** we are asking a different question of _"what happens if I actively change something in the system?"._ 
 
@@ -14,7 +16,30 @@ We now consider two relationships between gene A, gene B and a phenotype. If gen
 
 Be aware that we are now talking about **interventions** and not **observations** when talking about setting the genes activity to zero. We are actually actively deleting the gene B as opposed to observing a case.
 
-![Genes A, B and the phenotype](.gitbook/assets/image%20%282%29.png)
+![Causer and Confounder](.gitbook/assets/image%20%282%29.png)
+
+### Learning and Reasoning
+
+Overall, we talk about **learning** when we are building models based on data and **reasoning** when we are 
+
+In the classical statistical setting, you start with a probabilistic model and then you can do some **probabilistic reasoning** \(e.g. if I get a sample what is the distribution of the mean\). In **statistical learning**, you go the other way around: when I get some observations, I want to infer some parameters about my probabilistic model.
+
+In the other setting. when you are **causal reasoning** based on the causal model you not only make statements about observations but also about changes and interventions. When we are given some data, we want to infer something about the causal structure \(a.k.a. **structure learning**\).
+
+There is some correspondence between the two settings but there is a major difference. Usually, in statistics you are often in the search for infinite number of data points; there's no point in estimating the mean if you can calculate based on the whole population, i.e. you are given the full distribution.  
+In causality, even if you have an infinite amount of data points, the causal learning step does not become trivial because there is still the underlying problem of discovering the underlying causal structure. 
+
+![Causal vs Statistical](.gitbook/assets/image%20%284%29.png)
+
+### What is a Causal Model?
+
+Contrary to statistical models where we are just building a model for some distribution, on a **causal model** we will model several things at the same time:  
+- **Distribution,** model the distribution that you observe \(e.g. data points\);  
+- **Inverventional Distributions,** how the model reacts to interventions \(e.g. previous gene deletion\);  
+- **Causal Graph**,  
+- **Counterfactuals**, _what-if_ statements to be discussed later.
+
+
 
 
 
