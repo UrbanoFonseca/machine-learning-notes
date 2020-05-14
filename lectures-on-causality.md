@@ -39,7 +39,27 @@ Contrary to statistical models where we are just building a model for some distr
 - **Causal Graph**,  
 - **Counterfactuals**, _what-if_ statements to be discussed later.
 
+### Classical Examples of Non-Causality
 
+#### Chocolate and Nobel Prizes
 
+A known example of a strong correlation without a necessarily causal relationship is the relationship between countries per capita chocolate consumption and the number of Nobels per population. Assuming a causal relationship can lead to claiming things such as "Eating chocolate produces Nobel prize winners" or  "geniuses are more likely to eat lots of chocolate".
 
+![ Chocolate Consumption and Nobel Laureates](.gitbook/assets/image%20%286%29.png)
+
+#### Kidney Stones
+
+A clear example of how ignoring causality may lead to poor conclusions. Treatment A seems to be better both in small and large stones than Treatment B, but overall its total success rate is lower. Why? Because since Treatment A is expected to be better at dealing with difficult cases \(large stones\), its number of relative cases is biased towards those same difficult ones.
+
+| Success Rate | Treatment A | Treatment B |
+| :--- | :--- | :--- |
+| Small Stones | 81/87 = 0.93 | 234/270 = 0.87 |
+| Large Stones | 192/163 = 0.73 | 55/80 = 0.69 |
+| **Total** | **273/350 = 0.78** | **289/350 = 0.83** |
+
+As such, the size of the stone is a confounding factor of both the treatment \(e.g. larger stones will be more assigned towards Treatment A\) and the recovery \(e.g. larger stones have lower success rate\). The underlying question we are interested in is _"how the treatment influences the recovery?",_ i.e. the causal link between treatment and recovery. 
+
+![](.gitbook/assets/image%20%287%29.png)
+
+One example of intervention would be _"What is the expected recovery if all get Treatment B?"._
 
