@@ -69,8 +69,40 @@ arr = [arr..., 10, nothing]    # arr = [1, 3, 10, nothing]
 
 A **Linked List** is a sequential list of nodes that hold data which point to other nodes also containing data. A **node** is an object containing data and pointers. The first node is called the **head**, which has a reference \(called **pointer**\) ****to another node, and so forth until we get to the last node called the **tail**.
 
-![Linked Lists Terminology](.gitbook/assets/image.png)
+![Linked Lists Terminology](.gitbook/assets/image%20%282%29.png)
 
 _Singly vs Doubly_  
 While the nodes on a **singly** linked list only reference the next node, on a **doubly** linked list  the nodes contain references to the next and the previous node. In comparison, a singly uses less memory and has a simpler implementation, but it cannot be traversed backwards, in contrast to the doubly which takes twice the memory but allows to easily access previous elements. 
+
+
+
+## Stacks
+
+A **stack** is a one-ended linear DS which models a real world stack by having two primary operations: _pop_ and _push._ The elements in a stack follow a LIFO principle \(last-in first-out\), in which data members always get added or removed at the top of the pile. 
+
+![Stack, LIFO](.gitbook/assets/image%20%287%29.png)
+
+Common use cases for using stacks are reversing strings \(add characters by order and then pop them from the top\), matching brackets \(e.g. checking whether bracket combinations like "\[\(\({}\]\)\)\]"\).
+
+```python
+S = Stack()
+for bracket in bracket_string:
+    # getReversedBracket("{")) = "}"
+    # getReversedBracket("[")) = "]" 
+    rev = getReversedBracket(bracket)
+    
+    # if leftBracket, push to Stack
+    if isLeftBracket(bracket):
+        S.push(bracket)
+        
+    # if RightBracket
+    # if Stack is empty or lastElement is not reverse
+    elif S.isempty() or S.pop != rev:
+        return False  # 
+    
+    # True if all brackets match
+    return S.isempty()
+```
+
+\_\_
 
