@@ -8,7 +8,7 @@ description: 'https://www.youtube.com/watch?v=RBSGKlAvoiM'
 
 A **Data Structure** \(DS\) is a way of organizing data so that it can be used efficiently. It is the implementation of an ADT. 
 
-An **Abstract Data Type** \(ADT\) ****is an abstraction of a DS which provides only the interface to which a DS must adhere to. Defines how a DS should behave and what methods it should have, but not the details on how these methods are implemented.
+An **Abstract Data Type** \(ADT\) is an abstraction of a DS which provides only the interface to which a DS must adhere to. Defines how a DS should behave and what methods it should have, but not the details on how these methods are implemented.
 
 _Examples of DS \(ADT\): LinkedList \(List\), Golf Cart \(Vehicle\)_
 
