@@ -80,11 +80,13 @@ While the nodes on a **singly** linked list only reference the next node, on a *
 
 A **stack** is a one-ended linear DS which models a real world stack by having two primary operations: _pop_ and _push._ The elements in a stack follow a LIFO principle \(last-in first-out\), in which data members always get added or removed at the top of the pile. 
 
-![Stack, LIFO](.gitbook/assets/image%20%287%29.png)
+![Stack, LIFO](.gitbook/assets/image%20%288%29.png)
 
-Common use cases for using stacks are reversing strings \(add characters by order and then pop them from the top\), matching brackets \(e.g. checking whether bracket combinations like "\[\(\({}\]\)\)\]"\).
+Common use cases for using stacks are reversing strings \(add characters by order and then pop them from the top\), matching brackets \(e.g. checking whether bracket combinations like "\[\(\({}\]\)\)\]"\) or Depth first search \(DFS\) graph traversals.
 
 ```python
+"METACODE FOR REVERSING STRINGS USING STACKS."
+
 S = Stack()
 for bracket in bracket_string:
     # getReversedBracket("{")) = "}"
@@ -104,5 +106,38 @@ for bracket in bracket_string:
     return S.isempty()
 ```
 
-\_\_
+## Queues
+
+A **queue** is a linear DS which models real world queues by having two primary operations, namely _enqueue_ and _dequeue._ Every queue has a front and a back end; we insert elements into the back end \(enqueuing\) and we remove through the front \(dequeuing\). Opposed to Stacks, queues working in FIFO mode \(first-in first-out\).
+
+Alternative terms for handling stacks are _adding, offering_ for enqueuing and _polling, removing_ for dequeuing.
+
+Common use cases are first-come first-served request management, waiting lineups or Breadth first search \(BFS\) graph traversals.
+
+_Protip: think of queues as cash registers in a supermarket. When a customer pays for her groceries, you are dequeuing the "waiting customers" queue; when a new customer arrives \(enqueue\), he has to wait in line for everyone else to pay._
+
+![Graphical representation of a queue](.gitbook/assets/image%20%283%29.png)
+
+The **Breadth-First Search** \(BFS\) is a graph traversal algorithm which explores the nodes neighbours at present depth before moving on to nodes at next level. 
+
+```python
+"METACODE FOR BREAD-FIRST SEARCH (BFS) USING QUEUES."
+
+Q = Queue()
+Q.enqueue(starting_node)
+starting_node.visited = True
+
+while len(Q) > 0:         # while Q is not empty
+    
+    node = Q.dequeue()    # get a new node
+    
+    for neighbour in neighbours(node):  # Breadth First. For each neighbour
+        if neighbour.visited == False:  # if neighbour was not visited
+            neighbour.visited = True    # consider neighbour as visited
+            Q.enqueue(neighbour)        # add neighbour to queue
+    
+
+```
+
+
 
