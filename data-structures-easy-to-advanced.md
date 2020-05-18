@@ -69,7 +69,7 @@ arr = [arr..., 10, nothing]    # arr = [1, 3, 10, nothing]
 
 A **Linked List** is a sequential list of nodes that hold data which point to other nodes also containing data. A **node** is an object containing data and pointers. The first node is called the **head**, which has a reference \(called **pointer**\) ****to another node, and so forth until we get to the last node called the **tail**.
 
-![Linked Lists Terminology](.gitbook/assets/image%20%282%29.png)
+![Linked Lists Terminology](.gitbook/assets/image%20%284%29.png)
 
 _Singly vs Doubly_  
 While the nodes on a **singly** linked list only reference the next node, on a **doubly** linked list  the nodes contain references to the next and the previous node. In comparison, a singly uses less memory and has a simpler implementation, but it cannot be traversed backwards, in contrast to the doubly which takes twice the memory but allows to easily access previous elements. 
@@ -80,7 +80,7 @@ While the nodes on a **singly** linked list only reference the next node, on a *
 
 A **stack** is a one-ended linear DS which models a real world stack by having two primary operations: _pop_ and _push._ The elements in a stack follow a LIFO principle \(last-in first-out\), in which data members always get added or removed at the top of the pile. 
 
-![Stack, LIFO](.gitbook/assets/image%20%288%29.png)
+![Stack, LIFO](.gitbook/assets/image%20%2810%29.png)
 
 Common use cases for using stacks are reversing strings \(add characters by order and then pop them from the top\), matching brackets \(e.g. checking whether bracket combinations like "\[\(\({}\]\)\)\]"\) or Depth first search \(DFS\) graph traversals.
 
@@ -116,7 +116,7 @@ Common use cases are first-come first-served request management, waiting lineups
 
 _Protip: think of queues as cash registers in a supermarket. When a customer pays for her groceries, you are dequeuing the "waiting customers" queue; when a new customer arrives \(enqueue\), he has to wait in line for everyone else to pay._
 
-![Graphical representation of a queue](.gitbook/assets/image%20%283%29.png)
+![Graphical representation of a queue](.gitbook/assets/image%20%285%29.png)
 
 The **Breadth-First Search** \(BFS\) is a graph traversal algorithm which explores the nodes neighbours at present depth before moving on to nodes at next level. 
 
@@ -138,6 +138,25 @@ while len(Q) > 0:         # while Q is not empty
     
 
 ```
+
+## Priority Queue
+
+A **priority queue \(PQ\)** is an ADT that operates similar to a normal queue except that each element has a certain priority. Such priority determines the order in which the elements will be removed from the PQ. PQ only support elements with comparable data, i.e. with which we can define greater/lesser than relationship orders. At each step, the element polled from the heaped is selected to be the one with the highest/lowest priority.
+
+A **heap** is a tree based DS that satisfies the **heap invariant:** if A is a parent node of B then A is ordered with respect to B for all nodes A,B in the heap. Thus, a heap can be either a **Max Heap,** when the root is the largest value, ****or a **Min Heap**, with the root as the lowest value.   
+This translates to that the value of the parent node is always bigger than or equal to \(Max Heap\)/smaller than or equal to \(Min Heap\) its child nodes.
+
+![Max, Min Heap](.gitbook/assets/image%20%282%29.png)
+
+The **binary heap** is a **heap** where every node has exactly two children. A **complete binary tree** is a tree in which at every level \(except the last\) is completely filled and all the nodes are as far left as possible.
+
+![Complete Binary Tree](.gitbook/assets/image%20%2814%29.png)
+
+Common use cases for PQs are some implementations of Dijkstra's Shortest Path, Best First Search \(BFS\) or whenever you need to dynamically fetch the 'next best'/'next-worst' element.
+
+One possible **representation of a binary heap** is to store the elements in an array. As you traverse along the array, you are moving along the levels of the tree. By storing the heap in the zero-based array, you can easily retrieve a nodes childs with `2i + 1 //left` or `2i + 2 //right`.
+
+![Binary Heap as an Array](.gitbook/assets/image%20%2813%29.png)
 
 
 

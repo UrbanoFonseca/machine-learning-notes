@@ -16,7 +16,7 @@ We now consider two relationships between gene A, gene B and a phenotype. If gen
 
 Be aware that we are now talking about **interventions** and not **observations** when talking about setting the genes activity to zero. We are actually actively deleting the gene B as opposed to observing a case.
 
-![Causer and Confounder](.gitbook/assets/image%20%287%29.png)
+![Causer and Confounder](.gitbook/assets/image%20%289%29.png)
 
 ### Learning and Reasoning
 
@@ -45,7 +45,7 @@ Contrary to statistical models where we are just building a model for some distr
 
 A known example of a strong correlation without a necessarily causal relationship is the relationship between countries per capita chocolate consumption and the number of Nobels per population. Assuming a causal relationship can lead to claiming things such as "Eating chocolate produces Nobel prize winners" or  "geniuses are more likely to eat lots of chocolate".
 
-![ Chocolate Consumption and Nobel Laureates](.gitbook/assets/image%20%285%29.png)
+![ Chocolate Consumption and Nobel Laureates](.gitbook/assets/image%20%287%29.png)
 
 #### Kidney Stones
 
@@ -59,7 +59,7 @@ A clear example of how ignoring causality may lead to poor conclusions. Treatmen
 
 As such, the size of the stone is a confounding factor of both the treatment \(e.g. larger stones will be more assigned towards Treatment A\) and the recovery \(e.g. larger stones have lower success rate\). The underlying question we are interested in is _"how the treatment influences the recovery?",_ i.e. the causal link between treatment and recovery. 
 
-![](.gitbook/assets/image%20%286%29.png)
+![](.gitbook/assets/image%20%288%29.png)
 
 One example of intervention would be _"What is the expected recovery if all get Treatment B?"._
 
