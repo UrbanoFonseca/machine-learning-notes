@@ -63,3 +63,22 @@ As such, the size of the stone is a confounding factor of both the treatment \(e
 
 One example of intervention would be _"What is the expected recovery if all get Treatment B?"._
 
+## Part 1 - Causal Language and Causal Reasoning 
+
+Bear this question in mind.
+
+![Structural Causal Model \(SCM\) Components](.gitbook/assets/image%20%2815%29.png)
+
+### Example 1 - Altitude and Temperature
+
+Let's consider SCM\(S, Pᴺ\), i.e. a Structural Causal Model based on a set of equations S and a distribution Pᴺ of variables.
+
+$$
+X := N_X \\
+Y:= -6X + N_Y \\
+N_X, N_Y \stackrel{iid}{\sim} N(0, 1) \\
+S = \{ X, Y\} ; Pᴺ = \{ N_X, N_Y\}
+$$
+
+
+
