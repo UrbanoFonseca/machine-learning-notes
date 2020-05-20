@@ -80,5 +80,29 @@ N_X, N_Y \stackrel{iid}{\sim} N(0, 1) \\
 S = \{ X, Y\} ; Pᴺ = \{ N_X, N_Y\}
 $$
 
+What we are basically saying is that X variable is a factor for the Y,
+
+![Causal Relationship between X and Y](.gitbook/assets/image%20%2818%29.png)
+
+By the properties of summing and multiplying distributions, we get that,
+
+$$
+Y \sim N(0, 37) \\
+(X, Y) \sim N 
+\begin{pmatrix}\begin{pmatrix}0 \\ 0 \end{pmatrix}, 
+\begin{pmatrix} 1 & -6 \\ -6 & 37\end{pmatrix}\end{pmatrix}
+$$
+
+So, how do we consider interventions? Let's say that we fix the value for $$X:=3$$ , so that now $$Y \sim N(-18, 1)$$. On the other hand, we could intervene on the Y variable , which would cause the causal relationship to break and the two variables are now independent.
+
+$$
+Y \sim N(2,2) \\
+(X, Y) \sim N 
+\begin{pmatrix}\begin{pmatrix}0 \\ 2 \end{pmatrix}, 
+\begin{pmatrix} 1 & 0 \\ 0 & 2\end{pmatrix}\end{pmatrix}
+$$
+
+![X and Y are independent now](.gitbook/assets/image%20%2819%29.png)
+
 
 
