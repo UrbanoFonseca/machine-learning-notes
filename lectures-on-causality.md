@@ -1,5 +1,7 @@
 ---
-description: 'https://www.youtube.com/watch?v=zvrcyqcN9Wo'
+description: >-
+  Talk: https://www.youtube.com/watch?v=zvrcyqcN9Wo | Slides:
+  http://web.math.ku.dk/~peters/jonas_files/mitTutorialJonas.pdf
 ---
 
 # Lectures on Causality
@@ -82,7 +84,7 @@ $$
 
 What we are basically saying is that X variable is a factor for the Y,
 
-![Causal Relationship between X and Y](.gitbook/assets/image%20%2818%29.png)
+![Causal Relationship between X and Y](.gitbook/assets/image%20%2824%29.png)
 
 By the properties of summing and multiplying distributions, we get that,
 
@@ -102,7 +104,49 @@ Y \sim N(2,2) \\
 \begin{pmatrix} 1 & 0 \\ 0 & 2\end{pmatrix}\end{pmatrix}
 $$
 
-![X and Y are independent now](.gitbook/assets/image%20%2819%29.png)
+![X and Y are independent now](.gitbook/assets/image%20%2825%29.png)
 
+### Example 2 - DAG
 
+We can consider now a SCM with multiple random variables, in which some are causors of others.
+
+![Original SCM for G&#x2080;](.gitbook/assets/image%20%2816%29.png)
+
+Judea Pearl introduced the **do-notation** where we symbolize model interventions as follows. Bear in mind that the **interventions are not equivalent to conditionals**, i.e. $$P_{do(X_4:=13)} \neq P( \cdot | X_4 = 13)  $$. When intervening on $$X_4$$we are assigning its value, but we are not changing anything on its causors $$X_1, X_2, X_3$$. Additionally, not all the intervention assignments are constants.
+
+In this example, P is a joint distribution on all the variables X₁, X₂, X₃ and X₄.
+
+![](.gitbook/assets/image%20%2817%29.png)
+
+### Example 3 - Kidney Stones
+
+We go back to the previous example of the kidney stones. We do have the causal structure but we do not have the Structural Causal Model. Our goal is, with a finite amount of data, can we somehow infer somehow the treatment-recovery interventional distribution and infer the treatment.
+
+Goin back to the do-notation, what we want to compute is $$P_{do(T:=A)}$$from the **interventional distribution** but we only have data from the **observational distribution.**
+
+![](.gitbook/assets/image%20%2820%29.png)
+
+_"If you intervene only on_ $$X_j$$_, you intervene only on_ $$X_j$$_"_
+
+On the left, we have the **observational distribution** from where we have the data and in the right we have the **interventional distribution** where we set the treatment to A. For the interventional distribution, if we are intervening by setting the treatment to A, we are implicitly not changing the way the recovery depends on the size of the stone or/on \(??\) the treatment. By changing only the treatment, we are not intervening on the recovery, so the structural equation for the recovery remains the same. This also means that the conditional distributoin of the recovery given treatment and size does not change. Additionally, the marginal distribution of the size does not change with the intervention as well, $$P(S) = P_{do(T:=A)}(S)$$.
+
+![Observational and Interventional Distributions](.gitbook/assets/image%20%2823%29.png)
+
+The solution is the following:
+
+1. Marginalize over S , since recoveries \(R=1\) are fixed and the treatment is intervened \(T=A\)
+2. Split the joint distribution $$P(A,B) = P(A|B) P(B)$$, drop the T=A in the P\(B\) part
+3. Now the terms are the same for the observational and in the interventional distribution
+4. Now we multiply, for each size of the stone, the recovery rate with treatment A by the marginal probability of such size: 0.93\*0.51 + 0.73 \* 0.49 = 0.832
+5. If we do the same for treatment B, we get: 0.51 \* 0.87 + 0.49 \* 0.69 = 0.782
+
+![Solving the Probability of Recovery after Intervening on the Treatment](.gitbook/assets/image%20%2821%29.png)
+
+Now, we can assess the efficacy of both treatments without having the impact of the size of the stone biasing the more difficult cases towards Treatment A. Thus, the probability of recover if you force yourself to treatment A is 83.2% while in forcing yourself to treatment B is only 78.2%. As you can see, $$P_{do(T:=A)}(R=1) = 83.2\% \neq P(R=1 |  T=A) = 78\%$$.
+
+On a more general note, we can apply such logic to many other variables as well. Formally, we are saying that we have a SCM over X, Y and some covariate W; we are interested in the causal effect of X to Y. _As an example, here X would be the treatment and Y would be the recovery rate._ Then, Z is a valid adjustment set if we can compute an averaging of the conditional of y on x and z by the probability of z.
+
+The **Parent Adjustment** means that you can use the causal parents of X for adjustment.
+
+![](.gitbook/assets/image%20%2822%29.png)
 
