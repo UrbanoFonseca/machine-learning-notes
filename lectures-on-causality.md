@@ -65,7 +65,7 @@ One example of intervention would be _"What is the expected recovery if all get 
 
 ## Part 1 - Causal Language and Causal Reasoning 
 
-Bear this question in mind.
+Bear this picture in mind.
 
 ![Structural Causal Model \(SCM\) Components](.gitbook/assets/image%20%2815%29.png)
 
