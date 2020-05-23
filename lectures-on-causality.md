@@ -174,9 +174,11 @@ If we add a second causal path between X and Y, the causal effect will now be -2
 
 The Causal Effect also helps us understand the difference between conditional distributions and causal effects. A simple example would be a relationship $$Y \rightarrow X$$, in which the effect of X to Y $$C_{X \rightarrow Y} = 0$$. Nonetheless, since the conditional really changes if X is large than Y is probably also large.
 
+#### Adjustment Sets and Backdoor Paths
+
 Going back to the concept of **Adjustment Sets**, if we want to find the **Causal Effects** coefficients calculated previously $$C_{X \rightarrow Y}, C_{W \rightarrow X}$$, an alternative is to apply a **Linear Regression**.
 
-Thus, if Z is a valid adjusment set, then $$C_{X \rightarrow Y}$$is the regression coefficient for X in a linear model $$Y \sim X + Z$$. To find the correct causal effect  from X to Y without the confounding effect of Z, you just need to include the Z in the linear model.
+Thus, if Z is a valid adjustment set, then $$C_{X \rightarrow Y}$$is the regression coefficient for X in a linear model $$Y \sim X + Z$$. To find the correct causal effect  from X to Y without the confounding effect of Z, you just need to include the Z in the linear model.
 
 Consider now a more complicated example where we still want to estimate the effect of X on Y, but this time we have a "backdoor path" through A. Revisiting the previous definitions of the Parent Adjustments, if you adjust for the `parents(X) = {C, A}`,  more specifically for A since C does not create a "backdoor", we will still obtain the correct causal coefficient from X to Y.
 
@@ -212,22 +214,50 @@ H <- 0.5*Y + 0.1*rnorm(n)
 # coefficient to be 2.
 
 # Fit a linear regression on Y with X directly
-# Coeff(X) ≃ 1.35
+# The backdoor path creates the bias on this coefficient.
+# Coeff(X)≃1.35
 lm(Y ~ X)
 
 # Fit a linear regression on Y with X and K
-# Coeff(X) ≃ 2.00, Coeff(K) ≃ 1.97
+# Just adjusting to K is enough to have the unbiased estimation 
+# of the causal effect coefficient of 2.0
+# Coeff(X)≃2.00, Coeff(K)≃1.97
 lm(Y ~ X + K)
 
+# Fit a linear regression on Y with X, C and K
+# Coeff(X)≃2.00
+lm(Y ~ X + C + K)
+
+
 # Fit a linear regression on Y with X, F, C and K
-# 
+# Coeff(X)≃2.07, Coeff(F)≃-0.02, Coeff(C)≃0.02, Coeff(K)≃K
 lm(Y~X+F+C+K)$coefficients
 
-
+# Fit a linear regression on Y with X, F, C, K and H
+# Not all combinations are good nor including more variables gets us
+# closer to unbiased estimations. Including H here will bias the coefficient of X.
+# Coeff(X)=0.15
 lm(Y~X+F+C+K+H)$coefficients
 
-
 ```
+
+#### Randomized Experiments
+
+In many experiments we face hidden backdoor paths and hidden variables that can cause weird relationships between the variables \(e.g. chocolate and Nobels\). This leads us to never be sure that there is _yet_ another variable that we didn't took into account when defining the causal structure of the model, which you will eventually need to correct/adjust for.
+
+On a **randomized study**, you randomize the causer factor F \(e.g. the treatment in the kidney stones example\). You do are not observing anything, the decision for the distribution of the factor is derived from a random choice \(e.g. deal of a dice\). This automatically kills all the incoming arrows to F, turning the **Parent Adjustment** into an empty set and, with this, we do not have to adjust at all. Now we only need to run the model from the R on F. The beauty here is that, no matter how complicated the system is prior to F, by randomizing it gets very easy to calculate the causal link. This framework is the basis used currently in the medical science studies.
+
+![Randomized Study](.gitbook/assets/image%20%2832%29.png)
+
+Since we don't have any incoming arrows on F, the distribution of recovery R if we intervene on F is now equal to conditioning.
+
+### Equivalence of Causal Models
+
+It´s now important to define what means to have equivalent causal models. Considering a real life example of a model describing the data generating process. When you assume that the data comes from a Gaussian distribution, on receiving more data you will try to falsify the model based on statistical tests, i.e. if the new data does not look Gaussian I reject the model.
+
+With a causal model, falsifying does not only mean looking at the data generating process but also linking the data into interventions. If a causal model predicts a certain event, if a randomized experiment outcome is very different from the expected then it's probably the wrong causal model.
+
+![](.gitbook/assets/image%20%2833%29.png)
 
 
 
