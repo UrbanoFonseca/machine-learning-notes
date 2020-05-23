@@ -174,7 +174,35 @@ If we add a second causal path between X and Y, the causal effect will now be -2
 
 The Causal Effect also helps us understand the difference between conditional distributions and causal effects. A simple example would be a relationship $$Y \rightarrow X$$, in which the effect of X to Y $$C_{X \rightarrow Y} = 0$$. Nonetheless, since the conditional really changes if X is large than Y is probably also large.
 
+Going back to the concept of **Adjustment Sets**, if we want to find the **Causal Effects** coefficients calculated previously $$C_{X \rightarrow Y}, C_{W \rightarrow X}$$, an alternative is to apply a **Linear Regression**.
 
+Thus, if Z is a valid adjusment set, then $$C_{X \rightarrow Y}$$is the regression coefficient for X in a linear model $$Y \sim X + Z$$. To find the correct causal effect  from X to Y without the confounding effect of Z, you just need to include the Z in the linear model.
+
+Consider now a more complicated example where we still want to estimate the effect of X on Y, but this time we have a "backdoor path" through A. Revisiting the previous definitions of the Parent Adjustments, if you adjust for the `parents(X) = {C, A}`,  more specifically for A since C does not create a "backdoor", we will still obtain the correct causal coefficient from X to Y.
+
+There is a more general criteria than the _Parent Adjustment_ which is called the **Backdoor Adjustment** in which you aim to block all the backdoor paths. Additionally, {K} and {F, C, K} are also valid adjustment sets. Even if you don't have data for A available \(hidden variable\) and you need to adjust for that backdoor path, you can still use the data available of K _\(more on how to do it later\)._
+
+![Backdoor Paths and Adjustment Sets](.gitbook/assets/image%20%2830%29.png)
+
+#### Example \(with Code\)
+
+Considering that we now have some data and the causal structure, we will see how to calculate the causal coefficients.
+
+```r
+n <- 500
+
+# generate a sample from the distribution
+set.seed(1)
+C <- rnorm(n)
+A <- 0.8 * rnorm(n)
+K <- A + rnorm(n)
+X <- C - 2*A + 0.2*rnorm(n)
+F <- 3*X + 0.8*rnorm(n)
+D <- -2*X + 0.5*rnorm(n)
+G <- D + 0.5*rnorm(n)
+Y <- 2*K - D + 0.2*rnorm(n)
+H <- 0.5*Y + 0.1*rnorm(n)
+```
 
 
 
