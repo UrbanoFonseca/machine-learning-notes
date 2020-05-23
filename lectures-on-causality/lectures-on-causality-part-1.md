@@ -1,10 +1,11 @@
 ---
 description: >-
-  Talk: https://www.youtube.com/watch?v=zvrcyqcN9Wo | Slides:
-  http://web.math.ku.dk/~peters/jonas_files/mitTutorialJonas.pdf
+  Motivation (Statistics vs Causality, Learning and Reasoning, Causal Models).
+  Causal Language and Reasoning (Examples, Adjusting in Gaussian Linear
+  Regression, Equivalence of Causal Models)
 ---
 
-# Lectures on Causality
+# Lectures on Causality - Part 1
 
 ## Part 0 - Motivation
 
@@ -18,7 +19,7 @@ We now consider two relationships between gene A, gene B and a phenotype. If gen
 
 Be aware that we are now talking about **interventions** and not **observations** when talking about setting the genes activity to zero. We are actually actively deleting the gene B as opposed to observing a case.
 
-![Causer and Confounder](.gitbook/assets/image%20%289%29.png)
+![Causer and Confounder](../.gitbook/assets/image%20%289%29.png)
 
 ### Learning and Reasoning
 
@@ -31,7 +32,7 @@ In the other setting. when you are **causal reasoning** based on the causal mode
 There is some correspondence between the two settings but there is a major difference. Usually, in statistics you are often in the search for infinite number of data points; there's no point in estimating the mean if you can calculate based on the whole population, i.e. you are given the full distribution.  
 In causality, even if you have an infinite amount of data points, the causal learning step does not become trivial because there is still the underlying problem of discovering the underlying causal structure. 
 
-![Causal vs Statistical](.gitbook/assets/image.png)
+![Causal vs Statistical](../.gitbook/assets/image.png)
 
 ### What is a Causal Model?
 
@@ -47,7 +48,7 @@ Contrary to statistical models where we are just building a model for some distr
 
 A known example of a strong correlation without a necessarily causal relationship is the relationship between countries per capita chocolate consumption and the number of Nobels per population. Assuming a causal relationship can lead to claiming things such as "Eating chocolate produces Nobel prize winners" or  "geniuses are more likely to eat lots of chocolate".
 
-![ Chocolate Consumption and Nobel Laureates](.gitbook/assets/image%20%287%29.png)
+![ Chocolate Consumption and Nobel Laureates](../.gitbook/assets/image%20%287%29.png)
 
 #### Kidney Stones
 
@@ -61,7 +62,7 @@ A clear example of how ignoring causality may lead to poor conclusions. Treatmen
 
 As such, the size of the stone is a confounding factor of both the treatment \(e.g. larger stones will be more assigned towards Treatment A\) and the recovery \(e.g. larger stones have lower success rate\). The underlying question we are interested in is _"how the treatment influences the recovery?",_ i.e. the causal link between treatment and recovery. 
 
-![](.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 One example of intervention would be _"What is the expected recovery if all get Treatment B?"._
 
@@ -69,7 +70,7 @@ One example of intervention would be _"What is the expected recovery if all get 
 
 Bear this picture in mind.
 
-![Structural Causal Model \(SCM\) Components](.gitbook/assets/image%20%2815%29.png)
+![Structural Causal Model \(SCM\) Components](../.gitbook/assets/image%20%2815%29.png)
 
 ### Example 1 - Altitude and Temperature
 
@@ -84,7 +85,7 @@ $$
 
 What we are basically saying is that X variable is a factor for the Y,
 
-![Causal Relationship between X and Y](.gitbook/assets/image%20%2828%29.png)
+![Causal Relationship between X and Y](../.gitbook/assets/image%20%2828%29.png)
 
 By the properties of summing and multiplying distributions, we get that,
 
@@ -104,19 +105,19 @@ Y \sim N(2,2) \\
 \begin{pmatrix} 1 & 0 \\ 0 & 2\end{pmatrix}\end{pmatrix}
 $$
 
-![X and Y are independent now](.gitbook/assets/image%20%2829%29.png)
+![X and Y are independent now](../.gitbook/assets/image%20%2829%29.png)
 
 ### Example 2 - DAG
 
 We can consider now a SCM with multiple random variables, in which some are causers of others.
 
-![Original SCM for G&#x2080;](.gitbook/assets/image%20%2817%29.png)
+![Original SCM for G&#x2080;](../.gitbook/assets/image%20%2817%29.png)
 
 Judea Pearl introduced the **do-notation** where we symbolize model interventions as follows. Bear in mind that the **interventions are not equivalent to conditionals**, i.e. $$P_{do(X_4:=13)} \neq P( \cdot | X_4 = 13)  $$. When intervening on $$X_4$$we are assigning its value, but we are not changing anything on its causers $$X_1, X_2, X_3$$. Additionally, not all the intervention assignments are constants.
 
 In this example, P is a joint distribution on all the variables X₁, X₂, X₃ and X₄. If we set $$X1:=0$$, the causal relationship between X₁ and X₃ disapears since the former stops depending on the later. Nonetheless, the causal effects are still propagating throughout the DAG, X₁ to X₂ and then from X₂ to X₄.
 
-![](.gitbook/assets/image%20%2819%29.png)
+![](../.gitbook/assets/image%20%2819%29.png)
 
 ### Example 3 - Kidney Stones
 
@@ -124,13 +125,13 @@ We go back to the previous example of the kidney stones. We do have the causal s
 
 Going back to the do-notation, what we want to compute is $$P_{do(T:=A)}$$from the **interventional distribution** but we only have data from the **observational distribution.**
 
-![](.gitbook/assets/image%20%2823%29.png)
+![](../.gitbook/assets/image%20%2823%29.png)
 
 _"If you intervene only on_ $$X_j$$_, you intervene only on_ $$X_j$$_"_
 
 Going back to the kidney stones table, on the left graph we have the **observational distribution** from where we have the data and in the right we have the **interventional distribution** where we set the treatment to A. For the interventional distribution, if we are intervening by setting the treatment to A, i.e. we are implicitly not changing the way the recovery depends on the size of the stone on the treatment. By changing only the treatment, we are not intervening on the recovery, so the structural equation for the recovery remains the same. This also means that the conditional distribution of the recovery given treatment and size does not change. Additionally, the marginal distribution of the size does not change with the intervention as well, $$P(S) = P_{do(T:=A)}(S)$$.
 
-![Observational and Interventional Distributions](.gitbook/assets/image%20%2827%29.png)
+![Observational and Interventional Distributions](../.gitbook/assets/image%20%2827%29.png)
 
 The solution is the following:
 
@@ -140,7 +141,7 @@ The solution is the following:
 4. Now we multiply, for each size of the stone, the recovery rate with treatment A by the marginal probability of such size: 0.93\*0.51 + 0.73 \* 0.49 = 0.832
 5. If we do the same for treatment B, we get: 0.51 \* 0.87 + 0.49 \* 0.69 = 0.782
 
-![Solving the Probability of Recovery after Intervening on the Treatment](.gitbook/assets/image%20%2821%29.png)
+![Solving the Probability of Recovery after Intervening on the Treatment](../.gitbook/assets/image%20%2821%29.png)
 
 Now, we can assess the efficacy of both treatments without having the impact of the size of the stone biasing the more difficult cases towards Treatment A. Thus, the probability of recover if you force yourself to treatment A is 83.2% while in forcing yourself to treatment B is only 78.2%. As you can see, $$P_{do(T:=A)}(R=1) = 83.2\% \neq P(R=1 |  T=A) = 78\%$$.
 
@@ -148,7 +149,7 @@ On a more general note, we can apply such logic to many other variables as well.
 
 The **Parent Adjustment** is the easiest form of adjustment and it means that you can use the causal parents of X for adjustment. This allows to use the data from the observational distribution and compute the interventional distribution without having to intervene at all, by basing on the causal structure.
 
-![](.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2826%29.png)
 
 ### 
 
@@ -166,11 +167,11 @@ The **Causal Effect** has a very nice property when we are talking about Linear 
 
 Considering the example below, $$C_{X \rightarrow Y} = 5$$, $$C_{W \rightarrow X}=2$$ and $$C_{W \rightarrow Y} = 10$$. It is interesting that the path from X to Y via W is ignored since it is not a causal path.
 
-![Example of Causal Structure with Linear Gaussian](.gitbook/assets/image%20%2818%29.png)
+![Example of Causal Structure with Linear Gaussian](../.gitbook/assets/image%20%2818%29.png)
 
 If we add a second causal path between X and Y, the causal effect will now be -2, since we will add the causal effects throughout A and throughout B. $$C_{X \rightarrow Y} = 5 - 7 = -2$$
 
-![Example of Causal Structure w/ 2nd path between X and Y](.gitbook/assets/image%20%2824%29.png)
+![Example of Causal Structure w/ 2nd path between X and Y](../.gitbook/assets/image%20%2824%29.png)
 
 The Causal Effect also helps us understand the difference between conditional distributions and causal effects. A simple example would be a relationship $$Y \rightarrow X$$, in which the effect of X to Y $$C_{X \rightarrow Y} = 0$$. Nonetheless, since the conditional really changes if X is large than Y is probably also large.
 
@@ -184,7 +185,7 @@ Consider now a more complicated example where we still want to estimate the effe
 
 There is a more general criteria than the _Parent Adjustment_ which is called the **Backdoor Adjustment** in which you aim to block all the backdoor paths. Additionally, {K} and {F, C, K} are also valid adjustment sets. Even if you don't have data for A available \(hidden variable\) and you need to adjust for that backdoor path, you can still use the data available of K _\(more on how to do it later\)._
 
-![Backdoor Paths and Adjustment Sets](.gitbook/assets/image%20%2830%29.png)
+![Backdoor Paths and Adjustment Sets](../.gitbook/assets/image%20%2830%29.png)
 
 #### Example \(with Code\)
 
@@ -247,7 +248,7 @@ In many experiments we face hidden backdoor paths and hidden variables that can 
 
 On a **randomized study**, you randomize the causer factor F \(e.g. the treatment in the kidney stones example\). You do are not observing anything, the decision for the distribution of the factor is derived from a random choice \(e.g. deal of a dice\). This automatically kills all the incoming arrows to F, turning the **Parent Adjustment** into an empty set and, with this, we do not have to adjust at all. Now we only need to run the model from the R on F. The beauty here is that, no matter how complicated the system is prior to F, by randomizing it gets very easy to calculate the causal link. This framework is the basis used currently in the medical science studies.
 
-![Randomized Study](.gitbook/assets/image%20%2832%29.png)
+![Randomized Study](../.gitbook/assets/image%20%2832%29.png)
 
 Since we don't have any incoming arrows on F, the distribution of recovery R if we intervene on F is now equal to conditioning.
 
@@ -257,7 +258,7 @@ It´s now important to define what means to have equivalent causal models. Consi
 
 With a causal model, falsifying does not only mean looking at the data generating process but also linking the data into interventions. If a causal model predicts a certain event, if a randomized experiment outcome is very different from the expected then it's probably the wrong causal model.
 
-![](.gitbook/assets/image%20%2833%29.png)
+![](../.gitbook/assets/image%20%2833%29.png)
 
 
 
