@@ -10,7 +10,7 @@ description: >-
 
 ### Statistics vs Causality
 
-In **statistics** we are often predicting the expected value of a dependent variable based on some observed valu1es of our inputs. In **causality** we are asking a different question of _"what happens if I actively change something in the system?"._ 
+In **statistics** we are often predicting the expected value of a dependent variable based on some observed values of our inputs. In **causality** we are asking a different question of _"what happens if I actively change something in the system?"._ 
 
 _YSK: A phenotype is term used in genetics for the composite observable traits of an organism._
 
@@ -22,7 +22,7 @@ Be aware that we are now talking about **interventions** and not **observations*
 
 ### Learning and Reasoning
 
-Overall, we talk about **learning** when we are building models based on data and **reasoning** when we are 
+Overall, we talk about **learning** when we are building models based on data and **reasoning** when we are infering observations/outcomes based on the model.
 
 In the classical statistical setting, you start with a probabilistic model and then you can do some **probabilistic reasoning** \(e.g. if I get a sample what is the distribution of the mean\). In **statistical learning**, you go the other way around: when I get some observations, I want to infer some parameters about my probabilistic model.
 
@@ -37,7 +37,7 @@ In causality, even if you have an infinite amount of data points, the causal lea
 
 Contrary to statistical models where we are just building a model for some distribution, on a **causal model** we will model several things at the same time:  
 - **Distribution,** model the distribution that you observe \(e.g. data points\);  
-- **Inverventional Distributions,** how the model reacts to interventions \(e.g. previous gene deletion\);  
+- **Interventional Distributions,** how the model reacts to interventions \(e.g. previous gene deletion\);  
 - **Causal Graph**,  
 - **Counterfactuals**, _what-if_ statements to be discussed later.
 
@@ -84,7 +84,7 @@ $$
 
 What we are basically saying is that X variable is a factor for the Y,
 
-![Causal Relationship between X and Y](.gitbook/assets/image%20%2824%29.png)
+![Causal Relationship between X and Y](.gitbook/assets/image%20%2828%29.png)
 
 By the properties of summing and multiplying distributions, we get that,
 
@@ -104,33 +104,33 @@ Y \sim N(2,2) \\
 \begin{pmatrix} 1 & 0 \\ 0 & 2\end{pmatrix}\end{pmatrix}
 $$
 
-![X and Y are independent now](.gitbook/assets/image%20%2825%29.png)
+![X and Y are independent now](.gitbook/assets/image%20%2829%29.png)
 
 ### Example 2 - DAG
 
-We can consider now a SCM with multiple random variables, in which some are causors of others.
+We can consider now a SCM with multiple random variables, in which some are causers of others.
 
-![Original SCM for G&#x2080;](.gitbook/assets/image%20%2816%29.png)
+![Original SCM for G&#x2080;](.gitbook/assets/image%20%2817%29.png)
 
-Judea Pearl introduced the **do-notation** where we symbolize model interventions as follows. Bear in mind that the **interventions are not equivalent to conditionals**, i.e. $$P_{do(X_4:=13)} \neq P( \cdot | X_4 = 13)  $$. When intervening on $$X_4$$we are assigning its value, but we are not changing anything on its causors $$X_1, X_2, X_3$$. Additionally, not all the intervention assignments are constants.
+Judea Pearl introduced the **do-notation** where we symbolize model interventions as follows. Bear in mind that the **interventions are not equivalent to conditionals**, i.e. $$P_{do(X_4:=13)} \neq P( \cdot | X_4 = 13)  $$. When intervening on $$X_4$$we are assigning its value, but we are not changing anything on its causers $$X_1, X_2, X_3$$. Additionally, not all the intervention assignments are constants.
 
-In this example, P is a joint distribution on all the variables X₁, X₂, X₃ and X₄.
+In this example, P is a joint distribution on all the variables X₁, X₂, X₃ and X₄. If we set $$X1:=0$$, the causal relationship between X₁ and X₃ disapears since the former stops depending on the later. Nonetheless, the causal effects are still propagating throughout the DAG, X₁ to X₂ and then from X₂ to X₄.
 
-![](.gitbook/assets/image%20%2817%29.png)
+![](.gitbook/assets/image%20%2819%29.png)
 
 ### Example 3 - Kidney Stones
 
-We go back to the previous example of the kidney stones. We do have the causal structure but we do not have the Structural Causal Model. Our goal is, with a finite amount of data, can we somehow infer somehow the treatment-recovery interventional distribution and infer the treatment.
+We go back to the previous example of the kidney stones. We do have the causal structure but we do not have the Structural Causal Model. Our goal is too see if, with a finite amount of data, we can somehow infer the treatment-recovery interventional distribution and infer the treatment recovery rate.
 
-Goin back to the do-notation, what we want to compute is $$P_{do(T:=A)}$$from the **interventional distribution** but we only have data from the **observational distribution.**
+Going back to the do-notation, what we want to compute is $$P_{do(T:=A)}$$from the **interventional distribution** but we only have data from the **observational distribution.**
 
-![](.gitbook/assets/image%20%2820%29.png)
+![](.gitbook/assets/image%20%2823%29.png)
 
 _"If you intervene only on_ $$X_j$$_, you intervene only on_ $$X_j$$_"_
 
-On the left, we have the **observational distribution** from where we have the data and in the right we have the **interventional distribution** where we set the treatment to A. For the interventional distribution, if we are intervening by setting the treatment to A, we are implicitly not changing the way the recovery depends on the size of the stone or/on \(??\) the treatment. By changing only the treatment, we are not intervening on the recovery, so the structural equation for the recovery remains the same. This also means that the conditional distributoin of the recovery given treatment and size does not change. Additionally, the marginal distribution of the size does not change with the intervention as well, $$P(S) = P_{do(T:=A)}(S)$$.
+Going back to the kidney stones table, on the left graph we have the **observational distribution** from where we have the data and in the right we have the **interventional distribution** where we set the treatment to A. For the interventional distribution, if we are intervening by setting the treatment to A, i.e. we are implicitly not changing the way the recovery depends on the size of the stone on the treatment. By changing only the treatment, we are not intervening on the recovery, so the structural equation for the recovery remains the same. This also means that the conditional distribution of the recovery given treatment and size does not change. Additionally, the marginal distribution of the size does not change with the intervention as well, $$P(S) = P_{do(T:=A)}(S)$$.
 
-![Observational and Interventional Distributions](.gitbook/assets/image%20%2823%29.png)
+![Observational and Interventional Distributions](.gitbook/assets/image%20%2827%29.png)
 
 The solution is the following:
 
@@ -146,7 +146,35 @@ Now, we can assess the efficacy of both treatments without having the impact of 
 
 On a more general note, we can apply such logic to many other variables as well. Formally, we are saying that we have a SCM over X, Y and some covariate W; we are interested in the causal effect of X to Y. _As an example, here X would be the treatment and Y would be the recovery rate._ Then, Z is a valid adjustment set if we can compute an averaging of the conditional of y on x and z by the probability of z.
 
-The **Parent Adjustment** means that you can use the causal parents of X for adjustment.
+The **Parent Adjustment** is the easiest form of adjustment and it means that you can use the causal parents of X for adjustment. This allows to use the data from the observational distribution and compute the interventional distribution without having to intervene at all, by basing on the causal structure.
 
-![](.gitbook/assets/image%20%2822%29.png)
+![](.gitbook/assets/image%20%2826%29.png)
+
+### 
+
+### Adjusting in Gaussian Linear Models
+
+#### Causal Effect
+
+If we want to talk about causal effects, e.g. causal effects on X to Y, one possible approach is to compare $$P(Y)$$and the $$P_{do(X:=x)}(Y)$$. If these two distributions are very different, then X should have a strong effect on Y. One way of summarizing relationship, with special interest in Linear Models and based on one number alone, it to use the **Causal Effect** \(aka Causal Strength\)**.**
+
+$$
+C_{X \rightarrow Y} = \frac{d}{dx} E_{do(X:=x)}[Y ]
+$$
+
+The **Causal Effect** has a very nice property when we are talking about Linear Gaussian Models. The Causal Strength between the multiple variables is the multiplication of the causal paths \(i.e. coefficients\) between them. In the case of multiple causal paths, you sum the effects.
+
+Considering the example below, $$C_{X \rightarrow Y} = 5$$, $$C_{W \rightarrow X}=2$$ and $$C_{W \rightarrow Y} = 10$$. It is interesting that the path from X to Y via W is ignored since it is not a causal path.
+
+![Example of Causal Structure with Linear Gaussian](.gitbook/assets/image%20%2818%29.png)
+
+If we add a second causal path between X and Y, the causal effect will now be -2, since we will add the causal effects throughout A and throughout B. $$C_{X \rightarrow Y} = 5 - 7 = -2$$
+
+![Example of Causal Structure w/ 2nd path between X and Y](.gitbook/assets/image%20%2824%29.png)
+
+The Causal Effect also helps us understand the difference between conditional distributions and causal effects. A simple example would be a relationship $$Y \rightarrow X$$, in which the effect of X to Y $$C_{X \rightarrow Y} = 0$$. Nonetheless, since the conditional really changes if X is large than Y is probably also large.
+
+
+
+
 
