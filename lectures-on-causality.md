@@ -189,10 +189,15 @@ There is a more general criteria than the _Parent Adjustment_ which is called th
 Considering that we now have some data and the causal structure, we will see how to calculate the causal coefficients.
 
 ```r
-n <- 500
-
 # generate a sample from the distribution
 set.seed(1)
+
+# number of random points
+n <- 500
+
+# Create sample data with random noise
+# Causal Structure is the one presented above
+# rnorm returns a random generation for μ=0 and σ=1
 C <- rnorm(n)
 A <- 0.8 * rnorm(n)
 K <- A + rnorm(n)
@@ -202,6 +207,26 @@ D <- -2*X + 0.5*rnorm(n)
 G <- D + 0.5*rnorm(n)
 Y <- 2*K - D + 0.2*rnorm(n)
 H <- 0.5*Y + 0.1*rnorm(n)
+
+# From the SCM presented previously, we expected the Causal Effect
+# coefficient to be 2.
+
+# Fit a linear regression on Y with X directly
+# Coeff(X) ≃ 1.35
+lm(Y ~ X)
+
+# Fit a linear regression on Y with X and K
+# Coeff(X) ≃ 2.00, Coeff(K) ≃ 1.97
+lm(Y ~ X + K)
+
+# Fit a linear regression on Y with X, F, C and K
+# 
+lm(Y~X+F+C+K)$coefficients
+
+
+lm(Y~X+F+C+K+H)$coefficients
+
+
 ```
 
 
