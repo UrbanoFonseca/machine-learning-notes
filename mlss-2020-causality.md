@@ -160,3 +160,53 @@ and obtain $$p(X_k| do\ x_i)$$by marginalisation.
 
 ![Examples where conditional- and do-probability are NOT the same](.gitbook/assets/image%20%2837%29.png)
 
+
+
+### Causal Inference Method
+
+_Assuming a 2 random variables X and Y, how can we determine the causal relationship? Is X causing the values of Y or the other way around?_
+
+By using an **Additive Noise Model** $$Y=f(X) + N$$, we limit the complexity by which the noise acts upon the general functional model $$Y=f(X,N)$$by saying that it acts in an additive manner. So now, our ANM formula is $$Y:=f(X)+N_Y\ \text{, with } X \perp \!\!\! \perp N_Y$$, which is saying that Y is causally modeled by X plus some noise, and the causer X is independent of the noise \(again, if there was some cofounding variable causing X and Ny our graph would be incomplete\). Now we introduce the concept of **Identifiability**: when is there a backward model of the same form?
+
+> Prefer the causal direction that can better be fit with an additive noise model
+
+We can use a regression to fit Y as a function of X, compute the residuals $$N_Y := Y - f(X)$$ and check if they are independent statistically independent with X \(uncorrelation is not sufficient\).
+
+### Independence-based Regression
+
+The classical regression methods assume an underlying distribution for the noise \(e.g. minimize which, if incorrect, may cause the residuals to become dependent. 
+
+> **Independence-based Regression** minimizes the dependence of the residuals instead of maximizing the likelihood of data in the regression objective
+
+Use RKHS distance between kernel mean embeddings/Hilbert-Schmidt-norm of cross-covariance operator between two RKHSes as a dependence measure. 
+
+### Causal and Anticausal Learning
+
+We often use X and Y to talk about the features \(input\) and the label \(output\), where the model learns to predict the labels based on the inputs. On top of that, we can have situations where X causes Y and where Y causes X.
+
+* In **Causal Learning** the prediction flow matches causation. Model is trained based on input features that cause the labels. _Example: predicting gene from mRNA sequence_
+* In **Anticausal Learning**, we predict the labels that cause the input features. The prediction and causal relationships are reversed. _Example: MNIST class prediction from handwritten digits._
+
+> When we train a model to classify the class membership of handwritten digits \(i.e. saying if something is a 4 or a 5\), we are predicting the class which causes the handwritten digit to have certain structure. Being an 8 or a 6 determines \(i.e. causes\) the way the digit is handwritten, but when we incur in a recognition task we invert the prediction in relation to the cause.
+
+### Covariate Shift and Semi-Supervised Learning
+
+Goal: learn $$X \rightarrow Y$$, by estimating the properties of the distribution $$p(Y|X)$$.  
+In **semi-supervised learning**, we leverage unlabeled data to improve the estimates of $$p(X)$$.   
+When facing **covariate shift**, our $$p(X)$$changes between the train and the test \(cf. concept shift\).  
+Additionally, the **causal assumption** is that $$p(C)$$and the mechanism $$p(E|C)$$are "independent", i.e. that the distribution of the cause and the distribution of the effect given the cause are independent.
+
+On a **Causal Learning** set, where we predict based on inputs X that cause such labels Y, **semi-supervised learning is impossible.** The distributions of $$p(X)$$and $$p(Y|X)$$are independent \(cf. causal assumption\) and $$p(Y|X)$$is invariant under changes in $$p(X)$$, so improving the estimates of the input features will not affect our estimation for the distribution of the label under such inputs.
+
+On a **Anticausal Learning** scenario, where we predict the cause of our inputs $$Y \rightarrow X$$, **semi-supervised learning is possible.** Given $$p(X)$$and $$p(X|Y)$$are independent \(under causal assumption\), then $$p(X)$$and $$p(Y|X)$$are dependent and we can thus improve our estimation for the distribution of the label $$p(Y|X)$$ with better estimates for the distribution of our inputs $$p(X)$$.
+
+### Semi-Supervised Learning Assumptions
+
+The known SSL assumptions link $$p(X)$$to $$p(Y|X)$$:
+
+* **Cluster assumption:** points in the same cluster $$p(X)$$ should have the ame $$Y$$.
+* **Low density separation assumption:** $$p(Y|X)$$should cross 0.5 in area where $$p(X)$$is small. _When in doubt, point to the middle._
+* **Semi-supervised smoothness assumption:** $$E(Y|X)$$should be smooth where $$p(X)$$is large 
+
+
+
