@@ -22,10 +22,10 @@ To understand the causality relationship, we need to make an intervention. An in
 
 Examples of intervention:
 
-* $$a$$: raise the city, find that $$t$$ changes; _e.g. an elevator for the wheather station_
-* $$t$$: raise the temperature, find if $$a$$ doesn't change; _e.g. a giant heater around the wheather station_
+* $$a$$: raise the city, find that $$t$$ changes; _e.g. an elevator for the weather station_
+* $$t$$: raise the temperature, find if $$a$$ doesn't change; _e.g. a giant heater around the weather station_
 
-During this hypothetical thought experiment, we are expecting the altitude to be a causing factor for the change in the temperature, but not the other way around. As such, we are expecting $$p(t|a)$$to be invariant accross stations in similar climate zones. Given such altitude, the probability distribution for the temperatures in similar wheather conditions should be similar. Additionally, we are expecting the mechanism $$p(t|a)$$to be independent of $$p(a)$$, i.e. the mechanism that determines the temperature given the altitude should work independently of the mechanism that generates the altitude.
+During this hypothetical thought experiment, we are expecting the altitude to be a causing factor for the change in the temperature, but not the other way around. As such, we are expecting $$p(t|a)$$to be invariant across stations in similar climate zones. Given such altitude, the probability distribution for the temperatures in similar wheather conditions should be similar. Additionally, we are expecting the mechanism $$p(t|a)$$to be independent of $$p(a)$$, i.e. the mechanism that determines the temperature given the altitude should work independently of the mechanism that generates the altitude.
 
 ### Reichenbach's Common Cause Principle
 
@@ -35,9 +35,9 @@ Additionally, we can extend such concept so that the Z coincides with either X o
 
 ![Screenshot for Common Cause Principle](.gitbook/assets/image%20%2836%29.png)
 
-### Structural Causal Model
+### Structural Causal Model \(SCM\)
 
-The relationships between variables can be represented by a SCM. This model is a DAG with vertices as observables and arrows as direct causation, where each variable is modeled by the influence of its parents plus an unexplained variable \(aka noise\) so that $$X_i := f_i(PA_i, U_i).$$
+The relationships between variables can be represented by a SCM. This model is a DAG with vertices as observables and arrows indicating direct causation, where each variable is modeled by the influence of its parents plus an unexplained variable \(aka noise\) so that $$X_i := f_i(PA_i, U_i).$$
 
 
 
@@ -51,7 +51,7 @@ The noise variables are considered independent on the basis that if they were de
 
 _So, how do we convert this into a probabilistic distribution?_
 
-Without loops and since everything besides the noise variables is deterministic, we can recursively substitute the noise variables, evaluate the parent \(deterministic\) relationships to get the variable as a function of the noise terms$$X_i := g_i(U_1, .., U_n)$$. Since each $$X_i$$is a RV, we will get a joint distribution of $$X_1, ... X_n$$ called the _observational distribution._
+Without loops and since everything besides the noise variables is deterministic, we can recursively substitute the noise variables, evaluate the parent \(deterministic\) relationships to get the variable as a function of the noise terms$$X_i := g_i(U_1, .., U_n)$$. Since each $$X_i$$is a random variable, we will get a joint distribution of $$X_1, ... X_n$$ called the _observational distribution._
 
 ### Markov Conditions
 
@@ -74,7 +74,7 @@ The Markov condition states $$(X \perp \!\!\! \perp Y  | Z)_G  \Rightarrow (X \p
 ### Independent Mechanisms
 
 1. The factorization $$p(X_1, .. , X_n) = \Pi_i \ p(X_i | PA_i)$$ exists since noise terms are **independent**.
-2. Interventions are feasible if the **mechanisms** \(i.e. causal conditionals\) are **independent**: changing one $$p(X_i| PA_i)$$does not change the conditionals $$p(X_j| PA_j) \text{ for } i \neq j$$, they remain **invariant**. If both 
+2. Interventions are feasible if the **mechanisms** \(i.e. causal conditionals\) are **independent**: changing one $$p(X_i| PA_i)$$does not change the conditionals $$p(X_j| PA_j) \text{ for } i \neq j$$, they remain **invariant**. 
 
 If both are satisfied, we call this a **disentangled causal factorization**.
 
@@ -166,15 +166,15 @@ and obtain $$p(X_k| do\ x_i)$$by marginalisation.
 
 _Assuming a 2 random variables X and Y, how can we determine the causal relationship? Is X causing the values of Y or the other way around?_
 
-By using an **Additive Noise Model** $$Y=f(X) + N$$, we limit the complexity by which the noise acts upon the general functional model $$Y=f(X,N)$$by saying that it acts in an additive manner. So now, our ANM formula is $$Y:=f(X)+N_Y\ \text{, with } X \perp \!\!\! \perp N_Y$$, which is saying that Y is causally modeled by X plus some noise, and the causer X is independent of the noise \(again, if there was some cofounding variable causing X and Ny our graph would be incomplete\). Now we introduce the concept of **Identifiability**: when is there a backward model of the same form?
+By using an **Additive Noise Model** $$Y=f(X) + N$$, we limit the complexity by which the noise acts upon the general functional model $$Y=f(X,N)$$by saying that it acts in an additive manner. So now, our ANM formula is $$Y:=f(X)+N_Y\ \text{, with } X \perp \!\!\! \perp N_Y$$, which is saying that Y is causally modelled by X plus some noise, and the causer X is independent of the noise \(again, if there was some cofounding variable causing X and Ny our graph would be incomplete\). Now we introduce the concept of **Identifiability**: when is there a backward model of the same form?
 
 > Prefer the causal direction that can better be fit with an additive noise model
 
-We can use a regression to fit Y as a function of X, compute the residuals $$N_Y := Y - f(X)$$ and check if they are independent statistically independent with X \(uncorrelation is not sufficient\).
+We can use a regression to fit Y as a function of X, compute the residuals $$N_Y := Y - f(X)$$ and check if they are statistically independent with X \(uncorrelation is not sufficient\).
 
 ### Independence-based Regression
 
-The classical regression methods assume an underlying distribution for the noise \(e.g. minimize which, if incorrect, may cause the residuals to become dependent. 
+The classical regression methods assume an underlying distribution for the noise \(e.g. minimize MSE\) which, if incorrect, may cause the residuals to become dependent. 
 
 > **Independence-based Regression** minimizes the dependence of the residuals instead of maximizing the likelihood of data in the regression objective
 
@@ -187,12 +187,12 @@ We often use X and Y to talk about the features \(input\) and the label \(output
 * In **Causal Learning** the prediction flow matches causation. Model is trained based on input features that cause the labels. _Example: predicting gene from mRNA sequence_
 * In **Anticausal Learning**, we predict the labels that cause the input features. The prediction and causal relationships are reversed. _Example: MNIST class prediction from handwritten digits._
 
-> When we train a model to classify the class membership of handwritten digits \(i.e. saying if something is a 4 or a 5\), we are predicting the class which causes the handwritten digit to have certain structure. Being an 8 or a 6 determines \(i.e. causes\) the way the digit is handwritten, but when we incur in a recognition task we invert the prediction in relation to the cause.
+> When we train a model to classify the class membership of handwritten digits \(i.e. saying if some digit is a 4 or a 5\), we are predicting the class which causes the handwritten digit to have certain structure. Being an 8 or a 6 determines \(i.e. causes\) the way the digit is handwritten, but when we incur in a recognition task we invert the prediction in relation to the cause.
 
 ### Covariate Shift and Semi-Supervised Learning
 
 Goal: learn $$X \rightarrow Y$$, by estimating the properties of the distribution $$p(Y|X)$$.  
-In **semi-supervised learning**, we leverage unlabeled data to improve the estimates of $$p(X)$$.   
+In **semi-supervised learning**, we leverage unlabelled data to improve the estimates of $$p(X)$$.   
 When facing **covariate shift**, our $$p(X)$$changes between the train and the test \(cf. concept shift\).  
 Additionally, the **causal assumption** is that $$p(C)$$and the mechanism $$p(E|C)$$are "independent", i.e. that the distribution of the cause and the distribution of the effect given the cause are independent.
 
@@ -204,7 +204,7 @@ On a **Anticausal Learning** scenario, where we predict the cause of our inputs 
 
 The known SSL assumptions link $$p(X)$$to $$p(Y|X)$$:
 
-* **Cluster assumption:** points in the same cluster $$p(X)$$ should have the ame $$Y$$.
+* **Cluster assumption:** points in the same cluster $$p(X)$$ should have the same $$Y$$.
 * **Low density separation assumption:** $$p(Y|X)$$should cross 0.5 in area where $$p(X)$$is small. _When in doubt, point to the middle._
 * **Semi-supervised smoothness assumption:** $$E(Y|X)$$should be smooth where $$p(X)$$is large 
 
