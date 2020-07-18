@@ -22,8 +22,8 @@ To understand the causality relationship, we need to make an intervention. An in
 
 Examples of intervention:
 
-* $$a$$: raise the city, find that $$t$$ changes; _e.g. an elevator for the wheather station_
-* $$t$$: raise the temperature, find if $$a$$ doesn't change; _e.g. a giant heater around the wheather station_
+* $$a$$: raise the city, find that $$t$$ changes; _e.g. an elevator for the weather station_
+* $$t$$: raise the temperature, find if $$a$$ doesn't change; _e.g. a giant heater around the weather station_
 
 During this hypothetical thought experiment, we are expecting the altitude to be a causing factor for the change in the temperature, but not the other way around. As such, we are expecting $$p(t|a)$$to be invariant accross stations in similar climate zones. Given such altitude, the probability distribution for the temperatures in similar wheather conditions should be similar. Additionally, we are expecting the mechanism $$p(t|a)$$to be independent of $$p(a)$$, i.e. the mechanism that determines the temperature given the altitude should work independently of the mechanism that generates the altitude.
 
