@@ -28,5 +28,9 @@ Then, we do a 2-step:
 * Regress X on I. With nothing in between, you'll get an unbiased estimation for $$\delta$$. Find fitted values $$fitted\ values \approx \delta I$$
 * Regress Y on fitted values to get a rough estimate of $$\alpha$$, since all the other terms $$(  (\alpha \beta + \gamma)H, \alpha N_X, N_Y )$$are independent of Y.
 
+> A key detail is that the dimensionality of the instrumental variables must be the same as the dimensionality of X. Thus, if X is high-dimensional $$X \in R^5$$, then we need $$I_1, I_2, ... , I_5$$.
+
+## Counterfactuals
+
 
 
