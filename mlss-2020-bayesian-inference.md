@@ -47,5 +47,16 @@ The expectation under some distribution $$p_\theta$$ of some quantity$$f$$ corre
 **Gradient**  
 $$\nabla_\phi f(x; \phi) = \frac{\partial f(x;\phi)}{\partial \phi}$$
 
+### Probability of a Sequence
 
+#### Exchangeable Sequence of Events
+
+Under a condition of **infinite exchangeability** of events, the joint probability is invariant to permutation of the indices. $$p(x_1, ..\ , x_n) = p(x_{\pi_1}, ..\ , p_{\pi_n})$$.   
+_Examples: coin flip, drawing balls from an urn, some queuing systems_
+
+> An exchangeable ****\(a.k.a. interchangeable\) sequences of random variables is a finite or infinite sequence of r.v. such that for any finite permutation of the indices the joint probability of the permuted sequence is the same as the joint probability distribution of the original sequence.
+
+Formally, we can invoke **De Finetti's Theorem**. 
+
+\*\*\*\*$$p(x_1, \ .. \ , x_N) = \int \Pi^N_{n=1}p(x_n| \theta)P(d\theta) =  \int \Pi^N_{n=1}p(x_n| \theta)p(\theta)d\theta$$\*\*\*\*
 
