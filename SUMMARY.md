@@ -6,4 +6,5 @@
   * [Lectures on Causality - Part 2](lectures-on-causality/lectures-on-causality-part-2.md)
   * [Lectures on Causality - Part 1](lectures-on-causality/lectures-on-causality-part-1.md)
 * [MLSS 2020 - Causality](mlss-2020-causality.md)
+* [MLSS 2020 - Bayesian Inference](mlss-2020-bayesian-inference.md)
 
