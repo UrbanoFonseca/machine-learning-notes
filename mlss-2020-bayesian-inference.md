@@ -27,9 +27,9 @@ In DS/ML environment, a **model** is a description of the world, data, potential
 
 #### Conditions $$p(x)\geq 0 \quad \int p(x) d(x) = 1$$
 
-#### **Bayes Rule**
+**Bayes Rule**
 
-Allows you to invert conditional probabilities.  $$p(z|x) = \frac{p(x|z)p(z)}{p(x)}$$. Composed by:
+Allows you to invert conditional probabilities.  $$p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x \cap z)}{p(x)}$$. 
 
 * Posterior $$p(z|x)$$: probability of z given x
 * Likelihood $$p(x|z)$$: probability of x given z
@@ -38,7 +38,14 @@ Allows you to invert conditional probabilities.  $$p(z|x) = \frac{p(x|z)p(z)}{p(
 
 #### Parameterization
 
+Theta $$\theta$$represents quantities, i.e. parameters, that we want to optimize.$$p_\theta(x|z) \equiv p(x|z; \theta)$$
 
+#### Expectation
+
+The expectation under some distribution $$p_\theta$$ of some quantity$$f$$ corresponds to averaging the function $$f$$under the distribution $$p$$by integration.$$\mathbb{E}_{p_{\theta}(x|z)}[f(x;\phi)] = \int p_\theta(x|z)\ f(x;\phi)\ dx$$
+
+**Gradient**  
+$$\nabla_\phi f(x; \phi) = \frac{\partial f(x;\phi)}{\partial \phi}$$
 
 
 
