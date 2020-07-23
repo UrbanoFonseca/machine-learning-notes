@@ -29,12 +29,16 @@ In DS/ML environment, a **model** is a description of the world, data, potential
 
 **Bayes Rule**
 
-Allows you to invert conditional probabilities.  $$p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x \cap z)}{p(x)}$$. 
+Allows you to invert conditional probabilities.
+
+$$
+p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x \cap z)}{p(x)} = \frac{p(x|z)p(z)}{\int p(x, z)dz}
+$$
 
 * Posterior $$p(z|x)$$: probability of z given x
 * Likelihood $$p(x|z)$$: probability of x given z
 * Prior $$p(z)$$: knowledge.
-* Marginalization $$p(x)$$
+* Marginalization $$p(x), \int p(x,z)dz$$: marginal likelihood, model evidence
 
 #### Parameterization
 
@@ -59,4 +63,31 @@ _Examples: coin flip, drawing balls from an urn, some queuing systems_
 Formally, we can invoke **De Finetti's Theorem**. 
 
 \*\*\*\*$$p(x_1, \ .. \ , x_N) = \int \Pi^N_{n=1}p(x_n| \theta)P(d\theta) =  \int \Pi^N_{n=1}p(x_n| \theta)p(\theta)d\theta$$\*\*\*\*
+
+![](.gitbook/assets/image%20%2842%29.png)
+
+We are thus working on a **model-based** approach since we represent the sequence using a parameterized model.
+
+### Bayes Analysis
+
+> Bayesian approach follows the idea that all components of a model should be probabilistic and can be described by probability distributions
+
+Recalling the Bayes' Rule
+
+$$
+p(z|x) = \frac{p(x|z)p(z)}{\int p(x,z)dz}
+$$
+
+Bayesian analysis is an approach to modelling that follows:
+
+1. Decide on _a priori_ beliefs
+2. Posit an explanation of how the observed data is generated, i.e. provide a probabilistic description
+3. Allows recursive updating in the light of new evidence
+
+> In Bayesian analysis, things that are not observed must be integrated over, i.e. averaged out.
+
+We are interested in reasoning about two quantities
+
+* **Evidence** $$p(y|x)$$
+* **Posterior** $$p(\theta | y, x)$$\*\*\*\*
 
