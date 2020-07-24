@@ -1,6 +1,6 @@
 # MLSS 2020 - Bayesian Inference
 
-## Part 1
+## Part 1 - Learning
 
 ### Probability
 
@@ -90,4 +90,40 @@ We are interested in reasoning about two quantities
 
 * **Evidence** $$p(y|x)$$
 * **Posterior** $$p(\theta | y, x)$$\*\*\*\*
+
+## **Part 2 - Computation**
+
+### **Hierarchical Model**
+
+We define **hierarchical models** as models where the prior probability distributions can be decomposed into a sequence of conditional distributions
+
+$$
+p(z) = p(z_1|z_2)p(z_2|z_3)...p(z_{L-1}|z_L)
+$$
+
+### Likelihood Functions
+
+In a **probabilistic model**, we specify the probability f the data we observe given some parameters $$p(y|x)=p(y|h(x);\theta)$$.   
+The **Likelihood function** represents the likelihood of parameters, such as the log-likelihood $$L(\theta) = \sum\limits_n log\ p(y_n|x_n;\theta)$$. 
+
+Prescribed likelihoods are:  
+\* statistically efficient estimators for the parameters  
+\* tests with good power \(able to construct small confidence regions\)  
+ \* able to pool information \(e.g. different datasources, domain knowledge\)  
+\* inefficient in the case of misspecification  
+\* widely applicable \(e.g. correct biases, incomplete data\)
+
+#### Maximum Likelihood
+
+Learning the parameters with Max Likelihood as the optimization objective $$arg\  \underset{\theta}{max}\  L(\theta)$$is straightforward, natural way but it can be biased in finite sample size and may easily lead to overfitting the parameters.
+
+#### Regularization
+
+To overcome the limitations of MLE, we add a regularization term to the likelihood function
+
+$$
+L(\theta) = \sum\limits_n log\ p(y_n|x_n;\theta)\ +\ \frac{1}{\lambda}R(\theta)
+$$
+
+and with the **Maximum a Posteriori \(MAP\)** we should estimate this modified likelihood function which introduces the penalized term.
 
