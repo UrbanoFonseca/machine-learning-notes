@@ -7,4 +7,6 @@
   * [Lectures on Causality - Part 1](lectures-on-causality/lectures-on-causality-part-1.md)
 * [MLSS 2020 - Causality](mlss-2020-causality.md)
 * [MLSS 2020 - Bayesian Inference](mlss-2020-bayesian-inference.md)
+* [ML Ops](ml-ops/README.md)
+  * [Task Failed Successfully](ml-ops/task-failed-successfully.md)
 
