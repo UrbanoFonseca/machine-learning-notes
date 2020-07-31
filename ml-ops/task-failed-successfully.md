@@ -56,7 +56,7 @@ In order to make good on their guarantees, workflow management systems commit 3 
 2. The **cheat** is how we get past the compromise. These are workarounds to grant you functionalities which are not possible in the first place but will eventually create two systems \(original + workaround\) which are not aware of each other.
 3. This leads to **corruption,** when the _cheat_ goes against the philosophy of the workflow manager. Its danger comes from the system allowing you to do something which it is not fully aware and doesn't understand completely. 
 
-### XComs
+## XComs
 
 #### Compromise
 
@@ -67,6 +67,46 @@ With XComs you can create arbitrary data dependencies across tasks, DAGs and tim
 #### Corruption
 
 The Airflow system that governs the workflow's dependencies has no way of seeing that XComs exist. Even worse, such dependencies are stored in an unmonitored part of Airflow's metadata database with no transparency or TTL.
+
+
+
+## A Brief History of Workflows
+
+### CRON \(1987\)
+
+In the beginning there was CRON. There was a time trigger, no dependencies and people would often cheat on scheduling jobs on intervals. If you want something to run in sequence, you trigger the first for some epoch, the second to a _later_ epoch and you hope the first runs fast enough and that they work in the end.
+
+`"0 0 * * *"` means at 00h00 every day.
+
+### Oozie \(2011\), Azkaban \(2012\), Luigi \(2012\), Spark \(2014\), Airflow \(2015\)
+
+**Oozie** is "Cron, but in Java and XML".   
+**Azkaban** is "Cron, but with dependencies".   
+**Luigi** is "Cron, but with dependencies based on side effects."  
+**Spark** has a way of building computational graphs \(passes data instead of state\) has the same idea.  
+**Airflow** is "Cron, but with a database".
+
+![A Brief Summary of the Workflow Managers](../.gitbook/assets/image%20%2843%29.png)
+
+### Idempotency
+
+> **Idempotency** is the concept that if you run something many times it only causes an action once.
+
+## Prefect
+
+### Design
+
+**Rich State** objects are the currency of the entire system. These track both the task state \(success, failure, pause\) and its result, but allows users to customize semantics and logic.
+
+### Dask
+
+**Dask** is an open-source library for parallel computing written in Python and it was core for the development of Prefect.
+
+
+
+
+
+
 
 
 
