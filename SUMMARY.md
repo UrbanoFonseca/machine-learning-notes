@@ -10,5 +10,6 @@
 * [ML Ops](ml-ops/README.md)
   * [Task Failed Successfully](ml-ops/task-failed-successfully.md)
 * [Scala](scala/README.md)
+  * [Elements of Programming](scala/elements-of-programming.md)
   * [sbt](scala/sbt.md)
 
