@@ -9,5 +9,6 @@
 * [MLSS 2020 - Bayesian Inference](mlss-2020-bayesian-inference.md)
 * [ML Ops](ml-ops/README.md)
   * [Task Failed Successfully](ml-ops/task-failed-successfully.md)
-* [Scala](scala.md)
+* [Scala](scala/README.md)
+  * [sbt](scala/sbt.md)
 
