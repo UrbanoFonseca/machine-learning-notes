@@ -63,3 +63,23 @@ x = 3     // mutated x
 y         // 9
 ```
 
+### Code Blocks
+
+A **code block** is delimited by `{ .. }` such that definitions inside a block are only visible from within. Definitions of outer blocks are visible inside the block unless they are shadowed, i.e. same name replacement definitions.
+
+### Tail Recursion
+
+If a function calls itself as its last action, the function's stack frame can be reused. This is an iterative process called **tail recursion**. A tail recursion function can execute in constant stack space.
+
+```scala
+def gcd(a: Int, b: Int): Int = if (b==0) a else gcd(b, a%b)
+
+def factorial(n: Int): Int = if (n==0) 1 else n * factorial(n-1)
+```
+
+> In general, if the last action of a function consists of calling a function \(which may be the same\), one stack frame would be sufficient for both functions. This is called **tail calls**.
+
+As we can see in the examples above, `gcd` ends with a function call \(on itself\) but `factorial` ends with a multiplication operation, so that the stack keeps increasing. Being aware of tail recursion \(specially for very deep recursion operations\) can be crucial to avoid StackOverflow errors. 
+
+One can explicitly require a function to be tail-recursive by using the `@tailrec` annotation.
+
