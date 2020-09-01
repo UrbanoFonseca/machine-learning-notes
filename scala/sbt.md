@@ -1,10 +1,6 @@
 # sbt
 
-```text
-// other directories in /src and hidden directories will be ignored// other directories in /src and hidden directories will be ignored// other directories in /src and hidden directories will be ignored
-```
-
-### Definition
+## Definition
 
 **sbt** \(simple build tool\) is an interactive build tool for Scala and Java projects, similar to Maven.
 
@@ -12,7 +8,7 @@
 
 > **Apache Maven** is a build automation tool used primarily for Java projects, but it can also be used to build an manage projects written in C++, Ruby, Scala and other languages.
 
-### Organization
+## Organization
 
 The **base** or **project's root directory** is the directory holding the project and the `build.sbt`. 
 
@@ -35,9 +31,7 @@ src/
 
 The **project** folder contains `.scala` files which combined with `.sbt` files form the complete build definition.
 
-
-
-### Running SBT
+## Running SBT
 
 In the terminal, you can navigate to the directory holding the `build.sbt` and run the `$ sbt` command.
 
