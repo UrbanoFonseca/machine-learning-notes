@@ -10,6 +10,7 @@
 * [ML Ops](ml-ops/README.md)
   * [Task Failed Successfully](ml-ops/task-failed-successfully.md)
 * [Scala](scala/README.md)
+  * [Delivery](scala/delivery.md)
   * [Higher Order Functions](scala/higher-order-functions.md)
   * [Elements of Programming](scala/elements-of-programming.md)
   * [sbt](scala/sbt.md)
