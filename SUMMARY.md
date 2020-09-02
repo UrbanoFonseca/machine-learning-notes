@@ -12,6 +12,7 @@
 * [Scala](scala/README.md)
   * [Java](scala/java.md)
   * [Functional Programming](scala/functional-programming/README.md)
+    * [Classes](scala/functional-programming/classes.md)
     * [Elements of Programming](scala/functional-programming/elements-of-programming.md)
     * [Higher Order Functions](scala/functional-programming/higher-order-functions.md)
   * [I/O](scala/i-o.md)
