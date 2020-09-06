@@ -82,6 +82,23 @@ The ability to choose from different implementations of the data without affecti
 
 > An **operator** is a symbol that represents an operation to be performed with one or mode operand.
 
+### Precedence
+
+The precedence of an operator is determined by its first character, according to the following list.
+
+```scala
+(characters not shown below)
+* / %
++ -
+:
+= !
+< >
+&
+^
+|
+(all letters)
+```
+
 ### Infix Notation
 
 Any method with a parameter can be used as an infix operator.
