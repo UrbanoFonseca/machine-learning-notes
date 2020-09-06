@@ -1,10 +1,18 @@
 # Elements of Programming
 
-### Programming Paradigms
+## Programming Paradigms
 
+Paradigms are ways to classify programming languages based on their features. The same language can be classified under multiple paradigms.
 
+Common paradigms include:  
+- **Imperative** where the programmer instructs how to change state  
+- **Declarative** where the programmer declares properties of the desired result without specifying how to compute it.
 
-### Evaluation Strategies
+Imperative programming includes the **procedural** paradigm, which groups instructions into procedures/routines \(e.g. FORTRAN, COBOL, C\), and ****the **object-oriented** paradigm, which groups instructions together with the part of the state they operate upon \(e.g. Java, Python, Scala\).
+
+Declarative programming includes the **functional** paradigm, in which the result is declared as the value of a series of function applications \(e.g. Python, Kotlin, Scala\), the **logic** paradigm, in which the desired result is declared as as the answer to a question about a system of facts and rules \(e.g. Prolog\), and the **mathematical** paradigm, in which the result is declared as a solution of an  optimization problem.
+
+## Evaluation Strategies
 
 Under **call-by-name** \(CBN\), the functions recompute the passed-in expression's value every time it is accessed. Under the **call-by-value** \(CBV\), the functions compute passed-in expression's value before calling the function. 
 
@@ -46,9 +54,7 @@ def and(x: Boolean, y: => Boolean) = if (x) y else false
 def or(x: Boolean, y: => Boolean) = if (x) true else y
 ```
 
-
-
-### Value Definitions
+## Value Definitions
 
 The `def` form is a by-name since its hand right side is evaluated on each use.
 
@@ -63,11 +69,11 @@ x = 3     // mutated x
 y         // 9
 ```
 
-### Code Blocks
+## Code Blocks
 
 A **code block** is delimited by `{ .. }` such that definitions inside a block are only visible from within. Definitions of outer blocks are visible inside the block unless they are shadowed, i.e. same name replacement definitions.
 
-### Tail Recursion
+## Tail Recursion
 
 If a function calls itself as its last action, the function's stack frame can be reused. This is an iterative process called **tail recursion**. A tail recursion function can execute in constant stack space.
 
@@ -77,7 +83,7 @@ def gcd(a: Int, b: Int): Int = if (b==0) a else gcd(b, a%b)
 def factorial(n: Int): Int = if (n==0) 1 else n * factorial(n-1)
 ```
 
-> In general, if the last action of a function consists of calling a function \(which may be the same\), one stack frame would be sufficient for both functions. This is called **tail calls**.
+> In general, if the last action of a function consists of calling a function \(which may be the same\), one stack frame would be sufficient for both functions. This is designated as **tail calls**.
 
 As we can see in the examples above, `gcd` ends with a function call \(on itself\) but `factorial` ends with a multiplication operation, so that the stack keeps increasing. Being aware of tail recursion \(specially for very deep recursion operations\) can be crucial to avoid StackOverflow errors. 
 
