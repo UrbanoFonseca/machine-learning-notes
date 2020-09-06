@@ -50,6 +50,18 @@ A class implicitly introduces a constructor. The **primary constructor** of a cl
 1. takes the parameters of the class, and
 2. executes all statements in the class body
 
+We can extend the standard constructor of a class to use partially-defined arguments.
+
+```scala
+class Rational(x: Int, y: Int) {
+//    def this(x:Int) = this(x, 1)
+}
+
+// These will generate a similar object.
+new Rational(3, 1)
+new Rational(3)
+```
+
 
 
 ## Objects
