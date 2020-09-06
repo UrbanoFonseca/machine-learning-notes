@@ -97,6 +97,15 @@ The precedence of an operator is determined by its first character, according to
 ^
 |
 (all letters)
+
+// Example
+a + b ^? c ?^ d less a ==> b | c             // What is the order here?
+a + b ^? (c ?^ d) less a ==> b | c           // 1. ? character
+(a + b) ^? (c ?^ d) less a ==> b | c         // 2. + operator
+(a + b) ^? (c ?^ d) less (a ==> b) | c       // 3. ==> starts with '=' character
+((a + b) ^? (c ?^ d)) less (a ==> b) | c     // 4. ^? starts with '^'
+((a + b) ^? (c ?^ d)) less ((a ==> b) | c)   // 5. | operator
+((a + b) ^? (c ?^ d)) less ((a ==> b) | c)   // 6. less starts with a letter
 ```
 
 ### Infix Notation
