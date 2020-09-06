@@ -78,3 +78,38 @@ The ability to choose from different implementations of the data without affecti
 
 > **Data abstraction** is a programming and design technique that relies on the separation of interface and implementation and it refers to providing only essential information to the outside world while hiding their background details. _\(Tutorials Point, Data Abstraction in C++\)_
 
+## Operators
+
+> An **operator** is a symbol that represents an operation to be performed with one or mode operand.
+
+### Infix Notation
+
+Any method with a parameter can be used as an infix operator.
+
+```scala
+r.add(s)  // add r to s
+r add s   // add r to s
+```
+
+### Relaxed Identifiers
+
+Operators can be used as identifiers. Thus, identifiers can be **alphanumeric**, starting with a letter followed by a sequence of letters or numbers, or **symbolic**, starting with an operator symbol followed by other operator symbols.
+
+### Unary Operators
+
+You can specify 4 unary prefixes `unary_-`, `unary_+`, `unary_!` and `unary_~` that extend the functionality of a class.
+
+```scala
+class Rational(x: Int, y: Int) {
+    def numer = x
+    def denom = y
+    def unary_- = new Rational(-x, y)
+}
+
+// Same thing
+val x = new Rational(2, 3)
+(-x).numer // -2
+(-x).denom // 3
+-x.denom // -3 . Why? Because the minus is applied to x.denom
+```
+
