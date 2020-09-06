@@ -43,6 +43,13 @@ Alternatively, we can leverage the predefined `assert` function which also takes
 
 > `require` is used to enforce a precondition on the caller of a function while `assert` is used to check the code of the function itself.
 
+### Constructors
+
+A class implicitly introduces a constructor. The **primary constructor** of a class:
+
+1. takes the parameters of the class, and
+2. executes all statements in the class body
+
 
 
 ## Objects
