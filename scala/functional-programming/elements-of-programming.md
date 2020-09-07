@@ -89,5 +89,3 @@ As we can see in the examples above, `gcd` ends with a function call \(on itself
 
 One can explicitly require a function to be tail-recursive by using the `@tailrec` annotation.
 
-> In Scala, instead of using loops and iteration we use **recursion** by definition.
-
