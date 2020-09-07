@@ -72,10 +72,6 @@ Elements of a class are called **objects.** These are created by prefixing an ap
 
 A **Singleton Object** is a class that has exactly one instance and it is created lazily when it is referenced.
 
-### Object Extends App
-
-When you write `object Something extends App { }`, it means that what you write between those brackets is executable as a standalone App.
-
 ## Data Abstraction
 
 The ability to choose from different implementations of the data without affecting the desired behaviour is called **data abstraction**. In Scala, we can think of deciding whether to calculate some value as `val` or leave that as a `def` depending on how many calls we expect to happen. 
