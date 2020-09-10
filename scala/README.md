@@ -21,5 +21,3 @@ In Scala, everything is an expression. Instead of thinking about instructions, i
 
 In Scala, the **Unit Type** is associated with "no meaningful value", similar to `void` in other languages.
 
-The **Unit Type** is associated with a "no meaningful value", the equivalent of 
-
