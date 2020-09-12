@@ -80,6 +80,8 @@ Elements of a class are called **objects.** These are created by prefixing an ap
 
 A **Singleton Object** is a class that has exactly one instance and it is created lazily when it is referenced.
 
+A singleton object named the same as a class is called a **companion object** and it must be defined in the same source file as the class.
+
 ### Object Extends App
 
 When you write `object Something extends App { }`, it means that what you write between those brackets is executable as a standalone App.
@@ -167,5 +169,15 @@ val rufus = new Dog
 rufus.eat() // prints "I'm eating"
 ```
 
+## Case Class
 
+**Case classes** are lightweight data structures with boilerplate for some functionalitites, such as equals and hash code, serialization and pattern matching.
+
+```scala
+case class Bass(strings: Int, name: String)
+
+val fenderJazz = Bass(4, "Fender Jazz") // same as Bass.apply(...)
+val duplicateFenderJazz = Bass(4, "Fender Jazz")
+fenderJazz equals duplicateFenderJazz // true. equals is based on values.
+```
 
