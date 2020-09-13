@@ -10,6 +10,7 @@
 * [ML Ops](ml-ops/README.md)
   * [Task Failed Successfully](ml-ops/task-failed-successfully.md)
 * [Scala](scala/README.md)
+  * [Traits](scala/traits.md)
   * [Classes](scala/classes.md)
   * [Java](scala/java/README.md)
     * [Final](scala/java/final.md)
