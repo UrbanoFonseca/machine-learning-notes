@@ -43,7 +43,3 @@ defaultImplementation() // Returns the desired string
 2. The `apply` method allows calling an object with an argument
 3. After instantiating with the `new` keyword, the object now allows to create an UX which is function-oriented.
 
-## Syntax Sugars
-
-
-
