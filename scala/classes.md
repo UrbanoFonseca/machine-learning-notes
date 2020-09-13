@@ -181,3 +181,17 @@ val duplicateFenderJazz = Bass(4, "Fender Jazz")
 fenderJazz equals duplicateFenderJazz // true. equals is based on values.
 ```
 
+## Apply
+
+The presence of an `apply` method allows an instance of a class to be called as a function.
+
+```scala
+class Bass(brand: String) {
+  def apply(strings: Int) = println(s"My $brand bass has $strings strings")
+}
+
+val fenderJazz = new Bass("Fender")
+fenderJazz.apply(4)
+fenderJazz(4)
+```
+

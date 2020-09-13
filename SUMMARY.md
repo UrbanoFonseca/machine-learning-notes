@@ -14,6 +14,7 @@
   * [Java](scala/java/README.md)
     * [Final](scala/java/final.md)
   * [Functional Programming](scala/functional-programming/README.md)
+    * [Scala at Light Speed, Part 4](scala/functional-programming/scala-at-light-speed-part-4.md)
     * [Elements of Programming](scala/functional-programming/elements-of-programming.md)
     * [Higher Order Functions](scala/functional-programming/higher-order-functions.md)
   * [I/O](scala/i-o.md)

@@ -91,3 +91,49 @@ One can explicitly require a function to be tail-recursive by using the `@tailre
 
 > In Scala, instead of using loops and iteration we use **recursion** by definition.
 
+### The Magic Trick
+
+Detailing the tail recursion mechanism is key to understand its impact on memory requirements and efficiency.
+
+> The magic trick with tail recursion is that if the function will only call another function, then everything in the past can be erased and you only need to care about that new function with those arguments.
+
+Let's take the Factorial example in its two versions: tailed- and non-tailed-recursive implementations.
+
+```scala
+// Factorial
+// Multiply ints from 1 to n
+// 3! = 6 = 3 * 2 * 1
+// 5! = 120 = 5 * 4 * 3 * 2 * 1
+
+def tailedFib(n: Int, acc: Int = 1): Int = {
+  if (n==1) acc
+  else tailedFib(n-1, acc * n)
+}
+
+/** tailed implementation only needs to keep a constant number of elements
+ in memory during the calculation.
+
+tailedFib(3)
+tailedFib(2, 3)
+tailedFib(1, 6)
+6
+*/
+  
+  
+def nonTailedFib(n: Int): Int = {
+  if (n==1) 1
+  else n * nonTailedFib(n-1)
+}  
+/** 
+nonTailed Implementation needs to keep an increasing number of elements until
+it evaluates the final result.
+
+nonTailedFib(3) = 
+3 * nonTailedFib(2)
+3 * 2 * nonTailedFib(1)
+3 * 2 * 1
+6
+*/ 
+
+```
+
