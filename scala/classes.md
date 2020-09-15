@@ -80,6 +80,12 @@ Elements of a class are called **objects.** These are created by prefixing an ap
 
 A **Singleton Object** is a class that has exactly one instance and it is created lazily when it is referenced.
 
+A singleton object named the same as a class is called a **companion object** and it must be defined in the same source file as the class.
+
+A singleton object can extend an abstract class and this is used when it makes sense just to have one instance of a specific subclass.
+
+> Singleton objects are values, so a singleton object evaluates to itself.
+
 ### Object Extends App
 
 When you write `object Something extends App { }`, it means that what you write between those brackets is executable as a standalone App.
@@ -166,6 +172,40 @@ class Dog extends Animal
 val rufus = new Dog
 rufus.eat() // prints "I'm eating"
 ```
+
+## Case Class
+
+**Case classes** are lightweight data structures with boilerplate for some functionalitites, such as equals and hash code, serialization and pattern matching.
+
+```scala
+case class Bass(strings: Int, name: String)
+
+val fenderJazz = Bass(4, "Fender Jazz") // same as Bass.apply(...)
+val duplicateFenderJazz = Bass(4, "Fender Jazz")
+fenderJazz equals duplicateFenderJazz // true. equals is based on values.
+```
+
+## Apply
+
+The presence of an `apply` method allows an instance of a class to be called as a function.
+
+```scala
+class Bass(brand: String) {
+  def apply(strings: Int) = println(s"My $brand bass has $strings strings")
+}
+
+val fenderJazz = new Bass("Fender")
+fenderJazz.apply(4)
+fenderJazz(4)
+```
+
+## Abstract Classes
+
+Similar to Java's **abstract classes,** Scala implements the usage of an `abstract class` when you either want to create a base class that requires constructor arguments or if your scala code will be called from Java code.
+
+Since **Traits** do not allow for constructor parameters, if you need your base behaviour to depend on the input at instantiation you will need the abstract class. Bear in mind that a class can only extend one abstract class.
+
+In Scala, any user-defined class extends another class. If no superclass is defined, the standard class `Object` in the package `java.lang` is assumed. The direct or indirect superclasses of a class C are called **base classes** of C. If we define a superclass `Bass` and a subclass `JazzBass`, the base classes of `JazzBass` are both `Bass` and `Object`.
 
 
 
