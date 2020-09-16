@@ -13,10 +13,15 @@ trait Bass {
   def notes = strings * frets
 }
 
-case class JazzBass(strings: Int, frets: Int) extends Bass
+trait Instrument {
+  def describe = println("I am a musical instrument")
+}
+
+case class JazzBass(strings: Int, frets: Int) extends Bass with Instrument
 
 val fenderJazz = new JazzBass(4, 12)
 fenderJazz.notes // returns 48
+fenderJazz.describe // prints the message
 ```
 
 ### Inheritance vs Extension
