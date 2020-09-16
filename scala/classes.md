@@ -175,7 +175,7 @@ rufus.eat() // prints "I'm eating"
 
 ## Case Class
 
-**Case classes** are lightweight data structures with boilerplate for some functionalitites, such as equals and hash code, serialization and pattern matching.
+**Case classes** are lightweight data structures with boilerplate for some functionalities, such as equals and hash code, serialization and pattern matching.
 
 ```scala
 case class Bass(strings: Int, name: String)
@@ -201,11 +201,61 @@ fenderJazz(4)
 
 ## Abstract Classes
 
-Similar to Java's **abstract classes,** Scala implements the usage of an `abstract class` when you either want to create a base class that requires constructor arguments or if your scala code will be called from Java code.
+Similar to Java's **abstract classes,** Scala implements the usage of an `abstract class` when you either want to create a base class that requires constructor arguments or if your Scala code will be called from Java code.
 
 Since **Traits** do not allow for constructor parameters, if you need your base behaviour to depend on the input at instantiation you will need the abstract class. Bear in mind that a class can only extend one abstract class.
 
 In Scala, any user-defined class extends another class. If no superclass is defined, the standard class `Object` in the package `java.lang` is assumed. The direct or indirect superclasses of a class C are called **base classes** of C. If we define a superclass `Bass` and a subclass `JazzBass`, the base classes of `JazzBass` are both `Bass` and `Object`.
 
+## Class Organization
 
+### **Packages**
+
+Classes ****and objects are organized into **packages.** To place a class or object inside a package simply state using the `package` clause in the beginning of the source file.
+
+```scala
+package bass.examples
+
+object Jazz { .. } 
+// this object will be available under bass.examples.Jazz
+// or we can specify directy an import
+```
+
+### Imports
+
+We can import from either a `package` or an `object`, using either **named imports** where we specify the specific names we want to import \(e.g. `import bass.{JazzBass, PrecisionBass}`\) or using a **wildcard import** where everything is imported.
+
+Some entities are automatically imported by any Scala program, such as members of package `scala`, members of package `java.lang` and members of singleton object `scala.Predef` \(e.g. require, assert\).
+
+### Exceptions
+
+You can throw exceptions as in Java with the `throw` keyword, which aborts the evaluation and returns the exception as defined. The type of an exception throwing expression is `Nothing`.
+
+```scala
+def error(msg: String) = throw new Error(msg)
+```
+
+### Null Type
+
+Every reference class has also a **null**  as a value, where the type of `null` is Null, the latter being a subtype of every class that inherits from Object and being incompatible with subtypes of AnyVal.
+
+```scala
+val x = null
+val y: String = x // all good
+val z: Int = x // no good
+```
+
+### Class Hierarchy
+
+Scala has an Unified Type hierarchy. In Scala, all values are Objects \(including numerical values and functions\). Since Scala is class based, all values are instances of a class.
+
+![](../.gitbook/assets/image%20%2845%29.png)
+
+On an if-condition, the type of the expression will be the upper most class that is able to take both outcomes.
+
+```scala
+if (true) 1 else false // type: AnyVal
+if (true) 1 else "Nope" // type: Any
+if (true) 1.1 else 1.2 // type: Double
+```
 
