@@ -251,7 +251,7 @@ Scala has an Unified Type hierarchy. In Scala, all values are Objects \(includin
 
 ![](../.gitbook/assets/image%20%2845%29.png)
 
-On an if-condition, the type of the expression will be the upper most class that is able to take both outcomes.
+On an if-condition, the type of the expression will be the upper most class that is able to take both outcomes, i.e. the most specific supertype.
 
 ```scala
 if (true) 1 else false // type: AnyVal
