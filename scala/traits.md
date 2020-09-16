@@ -2,7 +2,7 @@
 
 ## Definition
 
-A **Trait** is a way to define method and field definitions such that a Class that extends the Trait must provide implementations of . A Scala Trait is similar in spirit to the Java Interface.
+A **Trait** is a way to define method and field definitions such that a Class that extends the Trait must provide implementations of . A Scala Trait is similar in spirit to the Java Interface, except they can contain fields and concrete methods. Nonetheless, Traits cannot have parameters, only classes can.
 
 A Trait can have both abstract and concrete implementations defined.
 
