@@ -175,7 +175,7 @@ rufus.eat() // prints "I'm eating"
 
 ## Case Class
 
-**Case classes** are lightweight data structures with boilerplate for some functionalitites, such as equals and hash code, serialization and pattern matching.
+**Case classes** are lightweight data structures with boilerplate for some functionalities, such as equals and hash code, serialization and pattern matching.
 
 ```scala
 case class Bass(strings: Int, name: String)
