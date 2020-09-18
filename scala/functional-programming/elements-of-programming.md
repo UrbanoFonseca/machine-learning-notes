@@ -149,5 +149,5 @@ Type parameters do not affect the evaluation in Scala. We assume that all type a
 
 Other programming languages that perform this type erasure are Java, Haskell, ML, OCaml; while other languages keep the type parameters around at run time, such as C++, C\#, F\#.
 
-
+The types are relevant for the compiler to verify that the program satisfies correctness properties but they are not relevant for execution.
 
