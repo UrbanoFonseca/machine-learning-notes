@@ -69,6 +69,8 @@ x = 3     // mutated x
 y         // 9
 ```
 
+> The difference between a `val` and a `def` concerns only the initialization: the `val` is evaluated  when the object is first initialized while the `def` is evaluated each time the object is referenced.
+
 ## Code Blocks
 
 A **code block** is delimited by `{ .. }` such that definitions inside a block are only visible from within. Definitions of outer blocks are visible inside the block unless they are shadowed, i.e. same name replacement definitions.
@@ -140,4 +142,12 @@ nonTailedFib(3) =
 ## Dynamic Binding
 
 Object-oriented programming languages \(Scala included\) implement **dynamic method dispatch**, where the code invoked by a method call will depend on the runtime type of an object that contains the method.
+
+## Types and Evaluation
+
+Type parameters do not affect the evaluation in Scala. We assume that all type arguments and type parameters are removed before the evaluation of a program. This is known as **type erasure.** 
+
+Other programming languages that perform this type erasure are Java, Haskell, ML, OCaml; while other languages keep the type parameters around at run time, such as C++, C\#, F\#.
+
+
 
