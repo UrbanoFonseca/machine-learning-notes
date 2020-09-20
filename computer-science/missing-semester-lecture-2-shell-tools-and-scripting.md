@@ -41,7 +41,7 @@ echo $? # 1
 # If the first didn't had a 0 error code (i.e. all good, a.k.a. true), 
 # then execute the second.
 false || echo "oops failed" 
-true || echo "won't be printed" # logical only requires one true for true.
+true || echo "won't be printed" # logical OR only requires one true for true.
 
 # Sleep on Booleans
 true && sleep 5 # Waits
