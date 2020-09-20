@@ -24,7 +24,7 @@ mcd () {
 ## Dollar Numbers - Reserved Keywords
 # $0 will be the name of the script
 # $1 to $9 : 1st to 9th 
-# $? error code of previous command
+# $? error code of previous command. 0 means everything went fine, no errors.
 # $_ last argument of previous comment
 ```
 
