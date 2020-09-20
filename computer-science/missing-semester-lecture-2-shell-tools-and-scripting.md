@@ -26,6 +26,27 @@ mcd () {
 # $1 to $9 : 1st to 9th 
 # $? error code of previous command. 0 means everything went fine, no errors.
 # $_ last argument of previous comment
+
+# Booleans 
+## Booleans and Errors
+true
+echo $? # 0
+false
+echo $? # 1
+
+## Booleans and Logical
+# Logical Priors and Conditionals
+
+# Executes the first one. If sucessful, executes the second one
+# If the first didn't had a 0 error code (i.e. all good, a.k.a. true), 
+# then execute the second.
+false || echo "oops failed" 
+
+# Sleep on Booleans
+true && sleep 5 # Waits
+false && sleep 5 # Gets executed immediately. Second condition is not ran.
+
+
 ```
 
 ## Bang Comments
