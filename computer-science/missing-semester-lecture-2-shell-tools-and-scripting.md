@@ -55,6 +55,15 @@ false && sleep 5 # Gets executed immediately. Second condition is not ran.
 # Command concatenation using semmicolon
 false ; echo "always prints"
 
+# Test utility allows to exit with a status determined by an expression.
+# -eq, -ge, -lt : equal, greater or equal than, less than (two Ints)
+# -e, -f : file exists, file exists and is regular file
+# -d : file exists and is directory
+# further info on `man test`
+
+# Curly Braces
+echo foo{,1,2,3}   # expands to "foo foo1 foo2 foo3"
+echo f{A,B}_d{C,D} # fA_dC, fA_dD, fB_dC, fB_dD
 ```
 
 ## Example \#1 
