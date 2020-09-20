@@ -1,6 +1,8 @@
 # Missing Semester - Lecture 2 - Shell Tools and Scripting
 
 ```bash
+
+
 # Variable definition
 foo=bar
 
@@ -26,6 +28,9 @@ mcd () {
 # $1 to $9 : 1st to 9th 
 # $? error code of previous command. 0 means everything went fine, no errors.
 # $_ last argument of previous comment
+# $# gets number of arguments
+# $$ gets the pid
+# $@ expands to all the arguments.
 
 # Booleans 
 ## Booleans and Errors
@@ -47,7 +52,36 @@ true || echo "won't be printed" # logical OR only requires one true for true.
 true && sleep 5 # Waits
 false && sleep 5 # Gets executed immediately. Second condition is not ran.
 
+# Command concatenation using semmicolon
+false ; echo "always prints"
 
+```
+
+## Example \#1 
+
+```bash
+#!/bin/bash
+
+echo "Starting program at $(date)"
+echo "Running program $0 with $# with the process id $$"
+
+for file in "$@"; do
+    grep foobar "$file" > /dev/null 2> /dev/null
+    # when pattern is not found, grep has exit status 1 (i.e. error)
+    # redirect stdout and stderr to a null register
+    
+    if [[ "$?" -ne 0 ]]; then # if last exit status is not success
+        echo "File $file does not have any foobar, adding one"
+        echo "# foobar" >> "$file" # appends string
+    fi
+end
+    
+    
+    # /dev/null is a special feature on UNIX systems where you can write
+    # and it will be dicarded
+    
+    # Redirection commands
+    # > for stdout, 2> for stderr, >> for append
 ```
 
 ## Bang Comments
