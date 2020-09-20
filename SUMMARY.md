@@ -25,4 +25,6 @@
     * [Scaladocs](scala/delivery/scaladocs.md)
     * [Testing](scala/delivery/testing.md)
   * [sbt](scala/sbt.md)
+* [Computer Science](computer-science/README.md)
+  * [Missing Semester - Lecture 2 - Shell Tools and Scripting](computer-science/missing-semester-lecture-2-shell-tools-and-scripting.md)
 
