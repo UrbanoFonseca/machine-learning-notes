@@ -43,3 +43,76 @@ defaultImplementation() // Returns the desired string
 2. The `apply` method allows calling an object with an argument
 3. After instantiating with the `new` keyword, the object now allows to create an UX which is function-oriented.
 
+## **Collections**
+
+### **List**
+
+```scala
+// Create a list
+val aList = List(1, 2, 3)
+
+// Get Elements
+val firstElement = aList.head // head - first element
+val rest = aList.tail         // tail - remaining values in a list
+
+// Prepend, Append
+val aPrependedList = 0 :: aList // :: prepend operator. List(0, 1, 2, 3)
+// +: prepends, :+ extends
+val anExtendedList = 0 +: aList :+ 6 // List(0, 1, 2, 3, 6)
+```
+
+### **Sequences, Vectors**
+
+A **Sequence** denoted by `Seq` keyword has a Trait \(e.g. abstract type\) and an `apply` factory method. The main characteristic of Sequences is that you can get the value at a given index.
+
+A **Vector** is particular type of Sequence which is very fast for large data. 
+
+```scala
+val aSequence: Seq[Int] = Seq(1, 2, 3)
+val accessedElement = aSequence(1) // returns 2, due to 0-index
+
+// Vector
+val aVector = Vector(1, 2, 3)
+```
+
+### **Set**
+
+A set is a collection with no duplicates.
+
+```scala
+val aSet = Set(1, 4, 2, 3, 2) // Set(1, 4, 2, 3)
+val setHasFive = aSet.contains(5) // false
+val anAddedSet = aSet + 5 // Set(5, 1, 4, 2, 3)
+val aRemovedSet = aSet - 3 // Set(1, 4, 2)
+```
+
+### **Ranges**
+
+A **Range** is an ordered sequence of integers that are equally spaced apart, useful for iterations. 
+
+```scala
+val aRange = 1 to 1000
+val twoByTwo = aRange.map( x => x * 2).toList
+```
+
+### **Tuples**
+
+**Tuples** are groups of values under the same value.
+
+```scala
+val aTuple = Tuple("Fender", "Jazz", 4)
+```
+
+### **Maps**
+
+A **Map** is an association between keys and values, similar to dictionary.
+
+```scala
+val aCatalog: Map[String, Int] = Map(
+  ("Apples", 50),
+  "Oranges" -> 100 // similar representation
+)
+
+val priceOfApples = aCatalog("Apples") // 50
+```
+
