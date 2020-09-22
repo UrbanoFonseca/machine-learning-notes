@@ -13,4 +13,5 @@ Notes and scribbles for web courses and stuff.
 * ML Ops
   * Task Failed Successfully
 * Functional Programming in Scala
+* Missing Semester
 
