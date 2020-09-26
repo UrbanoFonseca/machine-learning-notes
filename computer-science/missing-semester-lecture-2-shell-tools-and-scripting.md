@@ -1,8 +1,8 @@
 # Missing Semester - Lecture 2 - Shell Tools and Scripting
 
+## Full Lecture
+
 ```bash
-
-
 # Variable definition
 foo=bar
 
@@ -64,6 +64,18 @@ false ; echo "always prints"
 # Curly Braces
 echo foo{,1,2,3}   # expands to "foo foo1 foo2 foo3"
 echo f{A,B}_d{C,D} # fA_dC, fA_dD, fB_dC, fB_dD
+
+# Returns the difference files between 2 folders
+diff <(ls folderA) <(ls folderB)
+
+
+# Shebang a.k.a #!    
+# We can add the executable path to the beginning of the bash file so that
+# it knows how to be executable.
+# This alternative uses the env 
+#!/usr/bin/env python
+
+# shellcheck allows to have deeper insights into your .sh script
 ```
 
 ## Example \#1 
