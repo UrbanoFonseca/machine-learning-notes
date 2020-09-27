@@ -92,6 +92,14 @@ find . -name "*.csv" -exec cat {} + # prints all the contents under CSVs.
 grep foo mcd.sh # prints lines with foo in mcd.sh file
 grep -R foo .   # recursive search within directory
 
+# ripgrep a.k.a rg - recursive line-oriented CLI search tool
+rg mahalanobis # searches for mahalanobis pattern within directory
+
+# fzf - fuzzy finder
+history > fzf
+
+# List Directory
+tree # prints the directory tree
 ```
 
 ## Example \#1 
