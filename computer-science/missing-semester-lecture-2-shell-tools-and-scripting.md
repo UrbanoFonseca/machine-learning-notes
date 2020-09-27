@@ -64,6 +64,7 @@ false ; echo "always prints"
 # Curly Braces
 echo foo{,1,2,3}   # expands to "foo foo1 foo2 foo3"
 echo f{A,B}_d{C,D} # fA_dC, fA_dD, fB_dC, fB_dD
+echo file{1..3}    # file1 file2 file3
 
 # Returns the difference files between 2 folders
 diff <(ls folderA) <(ls folderB)
@@ -81,6 +82,16 @@ diff <(ls folderA) <(ls folderB)
 # Helper Methods
 # man is an interface for system reference manuals
 # tldr is a simplified, community-driven alternative
+
+# Finding Stuff
+# find not only allows to find files and directories in the dir tree 
+# but also to execute commands
+find . -name "*.csv" -exec cat {} + # prints all the contents under CSVs.
+
+# grep allows searching within the files' contents
+grep foo mcd.sh # prints lines with foo in mcd.sh file
+grep -R foo .   # recursive search within directory
+
 ```
 
 ## Example \#1 
@@ -108,6 +119,7 @@ end
     
     # Redirection commands
     # > for stdout, 2> for stderr, >> for append
+    
 ```
 
 ## Bang Comments
