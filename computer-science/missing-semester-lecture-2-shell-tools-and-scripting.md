@@ -76,6 +76,11 @@ diff <(ls folderA) <(ls folderB)
 #!/usr/bin/env python
 
 # shellcheck allows to have deeper insights into your .sh script
+# shellcheck my-awesome-script.sh
+
+# Helper Methods
+# man is an interface for system reference manuals
+# tldr is a simplified, community-driven alternative
 ```
 
 ## Example \#1 
