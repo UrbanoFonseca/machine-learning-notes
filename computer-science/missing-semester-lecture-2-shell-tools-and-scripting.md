@@ -100,6 +100,7 @@ history > fzf
 
 # List Directory
 tree # prints the directory tree
+nnn  # file manager in terminal
 ```
 
 ## Example \#1 
