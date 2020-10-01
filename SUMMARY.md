@@ -14,6 +14,7 @@
   * [Traits](scala/traits.md)
   * [Classes](scala/classes.md)
   * [Java](scala/java/README.md)
+    * [Main Method](scala/java/main-method.md)
     * [Final](scala/java/final.md)
   * [Functional Programming](scala/functional-programming/README.md)
     * [Scala at Light Speed, Part 4](scala/functional-programming/scala-at-light-speed-part-4.md)
