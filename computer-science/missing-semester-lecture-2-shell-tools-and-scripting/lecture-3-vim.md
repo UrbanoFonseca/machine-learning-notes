@@ -4,6 +4,8 @@
 
 Vim has multiple modes: normal, insert, replace, visual, command.
 
+Vim supports a **count** functionality that allows to enter the number of times you want to repeat a following command. So, pressing `v 3w` will select the next 3 words and pressing `8j` will move you down 3 rows.
+
 ## Normal Mode
 
 | Action | Command |
@@ -26,6 +28,15 @@ Vim has multiple modes: normal, insert, replace, visual, command.
 | copy \(yank\) + movement | y + {movement} |
 | copy line \(double y cmd\) | yy |
 | paste | p |
+| change word case | ~ |
+
+## Visual Mode.
+
+| Action | Command |
+| :--- | :--- |
+| Visual | v |
+| Visual Line | V |
+| Visual Block^ | ^V |
 
 ## Command Mode
 
