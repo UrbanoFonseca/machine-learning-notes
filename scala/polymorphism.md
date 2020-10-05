@@ -25,3 +25,15 @@ def myExampleFunction(ignoreArgument: MySubClass) = println("Print")
 
 **Generics** means that we can create many instances of a function or a class by type parameterization.
 
+### Static Binding
+
+**Static binding** is polymorphism applied at compile time.
+
+**Method overloading** enables multiple methods to share the same name but having different signatures, through their data types, order or number of parameters. At compile time, the compiler will know which method to invoke by assessing the type signatures.
+
+### Dynamic Binding
+
+**Dynamic binding** is polymorphism applied at runtime, aka late binding.
+
+**Method overriding** enables a subclass to provide a specific implementation of a method that is already provided by one of its superclasses.
+
