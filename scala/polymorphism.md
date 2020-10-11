@@ -23,7 +23,7 @@ class MySubClass extends MyBaseClass(name: String)
 def myExampleFunction(ignoreArgument: MySubClass) = println("Print")
 ```
 
-**Generics** means that we can create many instances of a function or a class by type parameterization.
+**Generics** means that we can create many instances of a function or a class by type parameterization. With generics, we can parameterize types with other types.
 
 ### Static Binding
 
@@ -36,4 +36,18 @@ def myExampleFunction(ignoreArgument: MySubClass) = println("Print")
 **Dynamic binding** is polymorphism applied at runtime, aka late binding.
 
 **Method overriding** enables a subclass to provide a specific implementation of a method that is already provided by one of its superclasses.
+
+## Bounds
+
+We can define upper and lower bounds for parameter types.
+
+```scala
+def assertAll[S <: IntSet](r: S): S = ???
+def assertAll[S >: NonEmpty](r: S): S = ???
+def assertAll[S >: NonEmpty <: IntSet](r: S): S = ???
+```
+
+## Covariance
+
+In Scala, the **arrays are not covariant**, which means that even if a type A is a subtype of B, an Array of A is not considered to be of subtype Array of B.
 
