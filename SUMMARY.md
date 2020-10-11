@@ -28,6 +28,7 @@
   * [sbt](scala/sbt.md)
 * [Computer Science](computer-science/README.md)
   * [Missing Semester](computer-science/missing-semester-lecture-2-shell-tools-and-scripting/README.md)
+    * [Lecture 4 - Data Wrangling](computer-science/missing-semester-lecture-2-shell-tools-and-scripting/lecture-4-data-wrangling.md)
     * [Lecture 2 - Shell Tools and Scripting](computer-science/missing-semester-lecture-2-shell-tools-and-scripting/lecture-2-shell-tools-and-scripting.md)
     * [Lecture 3 - Vim](computer-science/missing-semester-lecture-2-shell-tools-and-scripting/lecture-3-vim.md)
 * [Distributed Computing](distributed-computing/README.md)
