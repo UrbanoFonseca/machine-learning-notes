@@ -34,6 +34,7 @@ sed 's/.*timestamp//' # removes everything in line before timestamp
 # + (prev) 1 or more
 # ? (prev) 0 or 1. may or may not occur. 
 # [] matches any character within set
+# [^] mstches any character not within set
 
 # By default, regex applies first match
 # override behaviour with g (global) command
@@ -44,9 +45,12 @@ sed 's/.*timestamp//' # removes everything in line before timestamp
 
 # Capturing Groups
 # Allows to remember the values and use them later.
+# In the replacement, indicate the index with \ (e.g. \2 prints content of 2nd group)
 # () Groups multiple tokens together, capture group for extracting a substring or using a backreference.
 
 ```
 
+## Awk
 
+`awk` is a column based stream processor.
 
