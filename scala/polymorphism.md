@@ -51,3 +51,23 @@ def assertAll[S >: NonEmpty <: IntSet](r: S): S = ???
 
 In Scala, the **arrays are not covariant**, which means that even if a type A is a subtype of B, an Array of A is not considered to be of subtype Array of B.
 
+## Variance
+
+### Lists vs Array
+
+A **List** holds a sequenced, linear list of items and are immutable. Lists in Scala are implemented as Linked Lists. Only sequential access.
+
+An **Array** is flat and mutable. Direct and sequential access.
+
+In rough terms, immutable types can be covariant.
+
+### Definition
+
+Let C\[T\] be a parameterized type, A and B are types such that A &lt;: B. There are 3 possible relationships for C, which are defined during class definition:
+
+| Relationship | Relationship | Class Definition |
+| :--- | :--- | :--- |
+| Covariant |  ****C\[A\] &lt;: C\[B\]  | class C\[A+\] {..} |
+| Contravariant |  ****C\[A\] &gt;: C\[B\] | class C\[A-\] {..} |
+| Nonvariant | neither C\[A\] nor C\[B\] is subtypes of the other | class C\[A\] {..} |
+
