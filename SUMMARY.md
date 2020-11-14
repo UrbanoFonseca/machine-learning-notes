@@ -34,7 +34,7 @@
     * [Lecture 3 - Vim](computer-science/missing-semester-lecture-2-shell-tools-and-scripting/lecture-3-vim.md)
 * [Distributed Computing](distributed-computing/README.md)
   * [Spark](distributed-computing/spark/README.md)
-    * [Architecture](distributed-computing/spark/architecture.md)
+    * [Architecture: Quick Reference](distributed-computing/spark/architecture.md)
   * [Pig, Hive](distributed-computing/pig-hive.md)
   * [MapReduce](distributed-computing/mapreduce.md)
   * [Computer Science 101](distributed-computing/computer-science-101.md)
