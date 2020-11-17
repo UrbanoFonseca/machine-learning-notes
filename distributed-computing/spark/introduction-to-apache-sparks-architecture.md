@@ -64,7 +64,13 @@ A **Union** occurs when you combine data into new rows, the first set of rows is
 
 With **Coalesce,** you reduce the number of partitions of a dataset. With **Repartition,** you can either increase or decrease the number of partitions. _A Coalesce is narrow but repartitions are wide._
 
-A **Filter** enables you to subset the data according to specified criteria. A **Map** is a unitary transformation applied on every element 
+A **Filter** enables you to subset the data according to specified criteria. A **Map** is a unitary transformation applied on every element. 
+
+> **Shuffling** is the process of rearranging data within a cluster between stages and it is triggered by wide operations.
+
+Depending on the nature of the operations, they can be considered **narrow -** can be aggregated with local computations only on each partition - or **wide** - require sharing of data between multiple executors.
+
+For a better use of the Catalyst Optimizer, aim to group wide transformations together instead of going back and forth between wide and narrow operations. ****
 
 
 
