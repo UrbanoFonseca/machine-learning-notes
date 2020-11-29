@@ -1,8 +1,8 @@
 ---
-description: Advanced Apache Spark Training - Sameer Farooqui (Databricks)
+description: Notes on Advanced Apache Spark Training - Sameer Farooqui (Databricks)
 ---
 
-# Notes on Advanced Spark Training
+# Advanced Spark Training
 
 ## Ecosystem
 
@@ -35,23 +35,55 @@ RDDs that are shared for multiple purposes inside the same code block are good c
 
 ## Ways to Run Spark
 
+The concepts of Driver and Executors exist on the multiple methods to run Spark, the key difference between them is who starts the executor.
+
 ### **Local**
 
 **Local** mode is basically running Spark in one JVM on one machine containing both the Executors and the Driver, with static partitioning. Spark denotes the slots \(able to run tasks\) as cores. You should oversubscribe by a factor of 2x/3x the number of logical cores of the machine in which you are running. The threads are not pinned directly to the cores, there is an abstraction layer of the JVM and OS kernel inbetween the thread slots and the actual cores. At the same time, Spark is running internal threads \(e.g. for shuffle purposes\) which are mostly sitting idle. You can start local mode with the `--master` option to `local`\(one core\), `local[N]` using N cores or `local[*]` which uses the number of available logical cores \(which as previously discussed does not make much sense\).
 
 ### **Standalone**
 
-**Standalone Scheduler** is able to run on a cluster environment but it has a static partitioning. When starting the machines, certain JVMs will instantiate such as the Spark Master JVM. This is not the same as instantiating a Spark App. On each machine, a Worker JVM will startup and they will register with the Spark Master. Those JVMs are not the Spark Application, they can fare with 1GB of RAM for either the workers or the spark master. When we submit our application using spark-submit, a Driver will start wherever we specified and it will contact the Spark Master telling that it will require Executor JVMs to run the App. 
+**Standalone Scheduler** is able to run on a cluster environment but it has a static partitioning. When starting the machines, certain JVMs will instantiate such as the Spark Master JVM. This is not the same as instantiating a Spark App. On each machine, a Worker JVM will startup and they will register with the Spark Master. Those JVMs are not the Spark Application, they can fare with 1GB of RAM for either the workers or the spark master. When we submit our application using spark-submit, a Driver will start wherever we specified and it will contact the Spark Master telling that it will require Executor JVMs to run the App. a
 
 The Spark Master is a scheduler that decides where to launch the executor jvms, ordering the workers to start the specified executor jvms \(default of 1 per each machine\). All the Spark Master is doing is deciding and scheduling where each executor should run. The Worker is just responsible for starting up the required JVMs, but if they crash will restart the executor JVM. If the worker crashes, the Spark Master will restart it. 
 
 The settings are that 1. Apps are submited in FIFO by default; 2. you can request the maximum number of cores for the application from across the cluster with `spark.cores.max` and; 3. you can assign the memory per executor with `spark.executor.memory`.
+
+### YARN
+
+In Yarn, a master machine runs a **ResourceManager \(RM\)** and multiple slave machines run a **NodeManager \(NM\)** each, heartbeating and sharing info with the RM \(e.g. how many cores are occupied, how much network bandwith is being used\).
+
+When you submit a Spark Application, the RM will find a container on some node to start the **ApplicationMaster \(AM\).** The AM will not do any work, it works similar to the JobTracker in traditional MapReduce as it will be the brain of the operation. After it is spawn, the AM contacts the RM again to request **Containers** \(e.g. how many, how big\) to do the heavy work. The RM provides keys and tokens so that the AM can contact the NM directly and start those containers. The containers will then register back with the AM. When the App is finally running, the AM provides insights directly to the client which spawned the Application and the RM is out of the loop.
+
+Note the difference between containers and executors: when Spark runs on Yarn mode the executors will exist inside the Containers but such concept of containers could also be applicable Hadoop MapReduce jobs.
+
+The RM contains a Scheduler and an AppsMaster. The **Scheduler** decides where the AMs will run and where the containers will be scheduled.The **ApplicationsMaster \(AppsM\)** is responsbile for tracking the health state of individual AMs. The RM is made highly available with Zookeper.
+
+The concept of AM is not the Spark Master, it is a YARN Application Master that exists so that Containers can run Executors. 
+
+> There are 2 ways of running Spark on Yarn, the **client** mode and the **cluster** mode.
+
+#### Client Mode
+
+In the Client mode, the Driver runs on the client itself, i.e. the place where you started the application. If you start a Spark shell within a SSH session, the driver will be hosted on that machine. The AM and the multiple containers still exist in the cluster nodes, but when you trigger a collect action the result RDD will be made available directly in the Driver JVM and converted into the collection suitable for how you are running the application \(e.g. Array in the Spark shell\).
+
+The executors within the containers are in direct communication with the driver.
+
+One key downside of the client mode is that if the client is directly connected with the executors and it is disconnected somehow \(e.g. client on laptop is shutdown\), the entire application will shutdown. As such, the client mode is much more adequate for interactive work.
+
+#### Cluster Mode
+
+
 
 ### Notes
 
 This notion of **static partitioning** is not the same as RDDs, what it means is rhat when you launch your Spark application you will be stuck with the configurations you request. On the other side, with **dynamic partitioning** you can adapt the number of executors in the mid-life of the Spark App.
 
 If the partitions needed to execute a task are persisted within the same machine, the partitions go directly from the executor's JVM heap right to the thread.
+
+On spawn, the driver launches the Spark Web UI web server that allows you to monitor the status of the application. The defaults are 4040 for Spark App UI, 9870 for Resource Manager, 8088 for JobTracker and 8042 for node specific info.
+
+There is a **Scheduler inside the Driver**  that will decide where the actual tasks will be scheduled within the executors. Let's assume we have multiple executors on multiple machines in our cluster. For efficiency purposes, you should assign a Task to the Executor where the partition to be worked on exists \(either cached or in HDFS\). The driver has a **TaskScheduler** that aims to process level locality.
 
 ## spark-env.sh
 
@@ -77,4 +109,10 @@ For MapReduce, a **JobTracker** is the brain and the **TaskTracker** JVMs are ru
 The slots in MapReduce are hard-coded to be either Map or Reduce slots, which means that everything is launched at start and is kept idle but taking resources from the cluster. A Reduce task in the end will keep those resources from being used by the earlier Map stages. In Spark, the Slots inside the Executors are generic.
 
 In Spark, you will have an Executor JVM in each machine, inside that JVM you will have Slots, in those Slots you can run Tasks.
+
+## Lifecycle of a Spark App
+
+Every time you execute an **Action** on the application, a **Job** is executed. A Job is composed of one or more **Stages**, which decompose into one or more **Tasks**.
+
+
 
