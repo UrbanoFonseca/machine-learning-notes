@@ -139,5 +139,22 @@ In Spark, you will have an Executor JVM in each machine, inside that JVM you wil
 
 Every time you execute an **Action** on the application, a **Job** is executed. A Job is composed of one or more **Stages**, which decompose into one or more **Tasks**.
 
+## Memory and Persistence
+
+### Overall Recommendations
+
+* Use at most 75% of machine's memory for Spark
+* Minimum executor memory should be 8 GB, Max should be ~40GB \(cf. GC\)
+
+### Persistence
+
+Calling the **cache** method is equivalent to the persist with memory-only `.persist(MEMORY_ONLY)`, but the latter allows for greater flexibility. Partitions cannot be persisted halfway. If the RDD does not fit the size in memory when caching, it won't be stored to disk and it will be recomputed from the last available checkpoint \(previous persist method or read from disk\). The order in which RDDs are evacuated to make room for new cache requests is with the **LRU** \(Least Recent Used\) method.
+
+When using the `.persist(MEMORY_AND_DISK)`, if everything doesn't fit in memory the oldest partition will be moved into the local dir directory \(in its entirety, not partially\). This option keeps the RDDs deserialized in memory but serialized in disk.
+
+A third option `.persist(MEMORY_AND_DISK_SER)` keeps all RDDs serialized both in memory and disk. 
+
+> Persisting stores the RDDs deserialized as Java objects inside the JVM.
+
 
 
