@@ -37,6 +37,19 @@ RDDs that are shared for multiple purposes inside the same code block are good c
 
 The concepts of Driver and Executors exist on the multiple methods to run Spark, the key difference between them is who starts the executor.
 
+### Overview
+
+Spark provides an abstraction with **spark submit** that lets you develop your application code regardless of the way you execute by changing the `--master` flag and corresponding . This enables for an uniform interface for the multiple cluster managers.
+
+> The **Spark Central Master** decides where the executors will run.
+
+| **Mode** | Spark Central Master | Executor Spawn |
+| :--- | :--- | :--- |
+| **Local** | _na_ | Data Scientist |
+| **Standalone** | Standalone Master | Worker JVM |
+| **YARN** | YARN App Master | Node Manager |
+| **Mesos** | Mesos Master | Mesos Slave |
+
 ### **Local**
 
 **Local** mode is basically running Spark in one JVM on one machine containing both the Executors and the Driver, with static partitioning. Spark denotes the slots \(able to run tasks\) as cores. You should oversubscribe by a factor of 2x/3x the number of logical cores of the machine in which you are running. The threads are not pinned directly to the cores, there is an abstraction layer of the JVM and OS kernel inbetween the thread slots and the actual cores. At the same time, Spark is running internal threads \(e.g. for shuffle purposes\) which are mostly sitting idle. You can start local mode with the `--master` option to `local`\(one core\), `local[N]` using N cores or `local[*]` which uses the number of available logical cores \(which as previously discussed does not make much sense\).
@@ -51,9 +64,11 @@ The settings are that 1. Apps are submited in FIFO by default; 2. you can reques
 
 ### YARN
 
-In Yarn, a master machine runs a **ResourceManager \(RM\)** and multiple slave machines run a **NodeManager \(NM\)** each, heartbeating and sharing info with the RM \(e.g. how many cores are occupied, how much network bandwith is being used\).
+![](../../.gitbook/assets/image%20%2848%29.png)
 
-When you submit a Spark Application, the RM will find a container on some node to start the **ApplicationMaster \(AM\).** The AM will not do any work, it works similar to the JobTracker in traditional MapReduce as it will be the brain of the operation. After it is spawn, the AM contacts the RM again to request **Containers** \(e.g. how many, how big\) to do the heavy work. The RM provides keys and tokens so that the AM can contact the NM directly and start those containers. The containers will then register back with the AM. When the App is finally running, the AM provides insights directly to the client which spawned the Application and the RM is out of the loop.
+In Yarn, a master machine runs a **ResourceManager \(RM\)** and multiple slave machines run a **NodeManager \(NM\)** each, heartbeating and sharing info with the RM \(e.g. how many cores are occupied, how much network bandwidth is being used\).
+
+When you submit a Spark Application, the RM will find a container on some node to start the **ApplicationMaster \(AM\).** The AM will not do any work, it works similar to the JobTracker in traditional MapReduce as it will be the brain of the operation. After it is spawn, the AM contacts the RM again to request **Containers** to do the heavy work. The RM provides keys and tokens so that the AM can contact the NMs directly and start those containers. The containers will then register back with the AM. When the App is finally running, the AM provides insights directly to the client which spawned the Application and the RM is out of the loop.
 
 Note the difference between containers and executors: when Spark runs on Yarn mode the executors will exist inside the Containers but such concept of containers could also be applicable Hadoop MapReduce jobs.
 
@@ -72,6 +87,16 @@ The executors within the containers are in direct communication with the driver.
 One key downside of the client mode is that if the client is directly connected with the executors and it is disconnected somehow \(e.g. client on laptop is shutdown\), the entire application will shutdown. As such, the client mode is much more adequate for interactive work.
 
 #### Cluster Mode
+
+Suitable for non-interactive mode. The Client submits the Application, including the Driver, and the Driver will run within the AM itself. In this mode, you actually won't call collect methods but persist the results in some other way \(e.g. store to HDFS\)
+
+#### Settings
+
+| Setting | Definition |
+| :--- | :--- |
+| --num-executors | How many executors are allocated |
+| --executor-memory | RAM per executor |
+| --executor-cores | CPU Cores per each executor |
 
 
 
