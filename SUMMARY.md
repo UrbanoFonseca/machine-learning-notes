@@ -41,4 +41,6 @@
   * [MapReduce](distributed-computing/mapreduce.md)
   * [Computer Science 101](distributed-computing/computer-science-101.md)
   * [Hadoop](distributed-computing/hadoop.md)
+* [Databases](databases/README.md)
+  * [SQL](databases/sql.md)
 
