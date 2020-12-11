@@ -91,6 +91,23 @@ ORDER BY points DESC
 LIMIT 5 OFFSET 10
 ```
 
+### Nested Queries
+
+**ALL** guarantees that the condition satisfies the expresion for all rows in the subquery, **ANY** that satisfies for at least one row, **IN** is equivalent to =ANY\(\) and with **EXISTS** at least one row is returned.
+
+```sql
+/* get the highest points from a player also in the draft table */
+SELECT player, points FROM games
+WHERE points => ALL (
+    SELECT points FROM draft
+);
+
+SELECT player, points FROM games
+WHERE points IN (
+  SELECT MAX(points) FROM draft
+)
+```
+
 ### **Special Keywords**
 
 A start \* is a keyword that means "all attributes".
