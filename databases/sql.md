@@ -33,7 +33,13 @@ _Examples: Avg, Min, Max, Sum, Count_
 **WHERE** clause allows to filter the tuples before we compute the aggregation. If we want to use the result of the aggregations to subset further the result tuples, we need to use the **HAVING** clause.
 
 ```sql
-SELECT COUNT(DISTINCT player) FROM games
+SELECT COUNT(DISTINCT player) FROM games;
+
+SELECT player, AVG(points) AS avg_points
+FROM games
+GROUP BY player
+HAVING avg_points > 20;
+
 ```
 
 ### String Operations
@@ -46,6 +52,44 @@ SELECT COUNT(DISTINCT player) FROM games
 | SQLite | Sensitive | Single/Double |
 | DB2 | Sensitive | Single |
 | Oracle | Sensitive | Single |
+
+**LIKE** allows for string matching. `%` matches any substring \(one or more letters\), while `_` matches any one character.
+
+Concatenation allows to join two or more strings together. It can be achieved with `||` for SQL-92, `+` for Microsoft SQL and `CONCAT(string1, string2)` for MySQL \(or just a space between strings`'fds' 'fdsf'`\).
+
+### Output Redirection
+
+You can store the results from a query into another table with **CREATE** or **INSERT** new tuples from a query into an existing table. Since the last will extend an already existing table, the schema of the query must mtach the table.
+
+```sql
+CREATE TABLE NicePlayers (
+SELECT DISTINCT player FROM games);
+
+INSERT INTO NicePlayers (
+SELECT DISTINCT player FROM draft);
+```
+
+### **Output Control**
+
+When previewing the query we can order the results with the **ORDER BY** clause. 
+
+```sql
+/* ORDER BY <column*> [ASC|DESC] */
+SELECT player, points FROM games
+ORDER BY points;
+
+SELECT player, points FROM games
+ORDER BY points DESC, player ASC;
+```
+
+Additionally, we can limit the number of tuples with **LIMIT**, with or without an **OFFSET.**
+
+```sql
+/* LIMIT  <count> [offset] */
+SELECT player, points FROM games
+ORDER BY points DESC
+LIMIT 5 OFFSET 10
+```
 
 ### **Special Keywords**
 
