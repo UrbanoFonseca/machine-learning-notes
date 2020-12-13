@@ -6,9 +6,10 @@ SQL is actually composed by several languages:
 
 | Language | Tasks |
 | :--- | :--- |
-| Data Manipulation \(DML\) | Commands that manipulate data stored in DB |
+| Data Manipulation \(DML\) | Commands that manipulate data stored in DB \(create,w update, delete\) |
 | Data Definition \(DDL\) | Create Schemas, define things |
-| Data Control \(DCL\) | Security authorizations |
+| Data Control \(DCL\) | Control access, users & permissions |
+| Data Query \(DQL\) | Query information from DB \(read\) |
 
 > SQL is based on **bags**, instead of lists or set theory
 

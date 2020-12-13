@@ -42,5 +42,6 @@
   * [Computer Science 101](distributed-computing/computer-science-101.md)
   * [Hadoop](distributed-computing/hadoop.md)
 * [Databases](databases/README.md)
+  * [SQL Reference](databases/sql-reference.md)
   * [SQL](databases/sql.md)
 
