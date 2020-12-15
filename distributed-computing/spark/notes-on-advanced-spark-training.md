@@ -12,9 +12,9 @@ At the center, **Spark Core** uses memory and disk while it is processing data. 
 
 Outside the perimeter, we have filesystems \(e.g. HDFS, local\), databases \(e.g. mongoDB, Cassandra\). Also, Flume and Kafka can be buffers for Spark Streaming.
 
-The main goal is to be an General Unified Engine that is able to run multiple Specialized Systems, extending the original MapReduce Hadoop framework.
+The main goal is for Spark to be a General Unified Engine that is able to run multiple Specialized Systems, extending the original MapReduce Hadoop framework.
 
-## MapReduce
+## Legacy
 
 Previously, using MapReduce for multiple stage calculations would require writing the outputs of each MapReduce stages into HDFS and load it again from the filesystem, which would lead to complex coordination and a bottleneck on I/O alone. Spark allows to keep the data in memory inbetween the multiple jobs and write the results in the end to the desired database.
 
@@ -31,7 +31,7 @@ For reference, reading speed is 1Gb/s \(125MB/s\) from nodes within the same rac
 
 RDDs are Resilient Distributed Datasets, a fault-tolerant collection of elements that can be operated in parallel. To compute a transformation against each partition, you will require a thread assigned to a task.
 
-RDDs that are shared for multiple purposes inside the same code block are good candidates for being chached, i.e. their partitions are persisted in disk and/or memory on the executors such that their subsequent usage is much faster. Actually, **caching** is a lazy evaluation: when you are scripting and adding transformations to your DAG Spark will not persist the data right away, it will wait untill you command an action and it will cache the data only when the execution passes through that command. For performance purposes, you should cache on the most downstream step possible, such that all the ETL transformations calculated up until the point where you share the RDD \(i.e. execute different operations for different purposes\) are not duplicated.
+RDDs that are shared for multiple purposes inside the same code block are good candidates for being chached, i.e. their partitions are persisted in disk and/or memory on the executors such that their subsequent usage is much faster. Actually, **caching** is a lazy evaluation: when you are scripting and adding transformations to your DAG Spark will not persist the data right away, it will wait until you command an action and it will cache the data only when the execution passes through that command. For performance purposes, you should cache on the most downstream step possible, such that all the ETL transformations calculated up until the point where you share the RDD \(i.e. execute different operations for different purposes\) are not duplicated.
 
 ## Ways to Run Spark
 
@@ -52,11 +52,11 @@ Spark provides an abstraction with **spark submit** that lets you develop your a
 
 ### **Local**
 
-**Local** mode is basically running Spark in one JVM on one machine containing both the Executors and the Driver, with static partitioning. Spark denotes the slots \(able to run tasks\) as cores. You should oversubscribe by a factor of 2x/3x the number of logical cores of the machine in which you are running. The threads are not pinned directly to the cores, there is an abstraction layer of the JVM and OS kernel inbetween the thread slots and the actual cores. At the same time, Spark is running internal threads \(e.g. for shuffle purposes\) which are mostly sitting idle. You can start local mode with the `--master` option to `local`\(one core\), `local[N]` using N cores or `local[*]` which uses the number of available logical cores \(which as previously discussed does not make much sense\).
+**Local** mode is basically running Spark in one JVM on one machine containing both the Executors and the Driver, with static partitioning. Spark denotes the slots \(able to run tasks\) as cores. You should oversubscribe by a factor of 2x/3x the number of logical cores of the machine in which you are running. The threads are not pinned directly to the cores, there is an abstraction layer of the JVM and OS kernel in-between the thread slots and the actual cores. At the same time, Spark is running internal threads \(e.g. for shuffle purposes\) which are mostly sitting idle. You can start local mode with the `--master` option to `local`\(one core\), `local[N]` using N cores or `local[*]` which uses the number of available logical cores \(which as previously discussed does not make much sense\).
 
 ### **Standalone**
 
-**Standalone Scheduler** is able to run on a cluster environment but it has a static partitioning. When starting the machines, certain JVMs will instantiate such as the Spark Master JVM. This is not the same as instantiating a Spark App. On each machine, a Worker JVM will startup and they will register with the Spark Master. Those JVMs are not the Spark Application, they can fare with 1GB of RAM for either the workers or the spark master. When we submit our application using spark-submit, a Driver will start wherever we specified and it will contact the Spark Master telling that it will require Executor JVMs to run the App. a
+**Standalone Scheduler** is able to run on a cluster environment but it has a static partitioning. When starting the machines, certain JVMs will instantiate such as the Spark Master JVM. This is not the same as instantiating a Spark App. On each machine, a Worker JVM will startup and they will register with the Spark Master. Those JVMs are not the Spark Application, they can fare with 1GB of RAM for either the workers or the spark master. When we submit our application using spark-submit, a Driver will start wherever we specified and it will contact the Spark Master telling that it will require Executor JVMs to run the App.
 
 The Spark Master is a scheduler that decides where to launch the executor jvms, ordering the workers to start the specified executor jvms \(default of 1 per each machine\). All the Spark Master is doing is deciding and scheduling where each executor should run. The Worker is just responsible for starting up the required JVMs, but if they crash will restart the executor JVM. If the worker crashes, the Spark Master will restart it. 
 
@@ -102,7 +102,7 @@ Suitable for non-interactive mode. The Client submits the Application, including
 
 ### Notes
 
-This notion of **static partitioning** is not the same as RDDs, what it means is rhat when you launch your Spark application you will be stuck with the configurations you request. On the other side, with **dynamic partitioning** you can adapt the number of executors in the mid-life of the Spark App.
+This notion of **static partitioning** is not the same as RDDs, what it means is that when you launch your Spark application you will be stuck with the configurations you request. On the other side, with **dynamic partitioning** you can adapt the number of executors in the mid-life of the Spark App.
 
 If the partitions needed to execute a task are persisted within the same machine, the partitions go directly from the executor's JVM heap right to the thread.
 
